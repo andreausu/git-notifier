@@ -1,0 +1,26 @@
+language: ruby
+rvm:
+  - "2.2.0"
+before_install:
+  - curl -sL https://deb.nodesource.com/setup | sudo bash -
+  - sudo apt-get update
+  - sudo apt-get install -y nodejs
+  - sudo npm install -g bower
+  - git clone git://github.com/n1k0/casperjs.git ~/casperjs
+  - cd ~/casperjs
+  - git checkout tags/1.1-beta3
+  - export PATH=$PATH:`pwd`/bin
+  - cd -
+before_script:
+  - phantomjs --version
+  - casperjs --version
+  - cp config.yml.example config.yml
+  - bundle install
+  - bower install
+  - rvmsudo bundle exec rackup -p 80 -D
+script:
+  - casperjs test test/casper/unauthenticated.js
+
+addons:
+  hosts:
+    - githubnotifier.local
