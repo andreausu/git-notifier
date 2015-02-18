@@ -1,0 +1,37 @@
+---
+github:
+    client_id: someid
+    client_secret: somesecret
+
+redis:
+    host: localhost
+    port: 6379
+    db: 1
+    namespace: ghntfr
+
+mail:
+    method: smtp
+    from: GitHub Notifier <sender@email.com>
+    host: smtp.example.org
+    port: 587
+    user: someuser@somedomain.com
+    password: somepass
+
+domain: localhost:4567
+
+secret: somesecretzzz
+
+notifications_type:
+  - star
+  - fork
+  - follow
+  - unfollow
+  - deleted
+  - site-news
+
+notifications_frequency:
+  - asap
+  - daily
+  - weekly
+
+deploy_id: 1

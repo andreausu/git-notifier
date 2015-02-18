@@ -1,0 +1,34 @@
+%div#unsubscribe_question
+  %h3 Getting too many emails?<br />You can choose to receive a nice daily or weekly report instead!
+  %h4 Otherwise, <a id="show_unsubscribe" href="#unsubscribe">click here</a> to unsubscribe.
+
+%div#unsubscribe_form.hidden(style="padding-bottom: 20px;")
+  %form(role="form" action="/unsubscribe" method="post")
+    = csrf_tag()
+    .form-group
+      - notifications_type.each do |notif|
+        .checkbox
+          %label
+            %input{ :type => "checkbox", :name => "notifications[]", :id => notif, :value => notif, :checked => (!disabled_notifications_type.include? notif)}
+            = notif
+
+      %input{ :type => "hidden", :name => "id", :value => github_id}
+      %input{ :type => "hidden", :name => "timestamp", :value => timestamp}
+      %input{ :type => "hidden", :name => "v", :value => hmac}
+    %button(type="submit" class="btn btn-default" name="unsubscribe") Change preferences
+    %button(type="submit" class="btn btn-default" name="unsubscribe_all") Unsubscribe all
+
+%div#change_frequency_form(style="padding-bottom: 20px;")
+  %form(role="form" action="/unsubscribe" method="post")
+    = csrf_tag()
+    .form-group
+      - notifications_frequency.each do |notif|
+        .radio
+          %label
+            %input{ :type => "radio", :name => 'notifications_frequency', :id => notif, :value => notif, :checked => (notif == current_frequency)}
+            = notif.capitalize
+
+      %input{ :type => "hidden", :name => "id", :value => github_id}
+      %input{ :type => "hidden", :name => "timestamp", :value => timestamp}
+      %input{ :type => "hidden", :name => "v", :value => hmac}
+    %button(type="submit" class="btn btn-default" name="change_frequency") Save

@@ -1,0 +1,10 @@
+.DS_Store
+config.yml
+config/newrelic.yml
+log/*
+bower_components/
+.git_old*
+tmp/pids/*
+tmp/sockets*
+scripts/notes.txt
+.capistrano/

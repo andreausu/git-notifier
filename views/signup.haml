@@ -1,0 +1,15 @@
+%form(role="form" id="signup" action="/signup" method="post")
+  = csrf_tag()
+  .form-group
+    - email_addresses.each do |email|
+      .radio
+        %label
+          %input(type="radio" name="email" value="#{email.email}" checked)
+          = email.email
+    .radio
+      %label
+        %input(type="radio" name="email" id="other_email_radio" value="other_email")
+        %input(id="other_email" type="email" name="other_email" value="" placeholder="Choose a different email")
+        %div#other_email_suggestion.form_suggestion
+  %button(type="submit" class="btn btn-default" id="signup_button")
+    Signup

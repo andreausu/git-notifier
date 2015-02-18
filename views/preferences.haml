@@ -1,0 +1,20 @@
+%div#preferences{:'data-csrf' => csrf_token()}
+  %div#notifications_type
+    %h5 Choose the type of notifications you wish to receive
+    - notifications_type.each do |notif|
+      .checkbox
+        %label
+          %input{ :type => "checkbox", :name => "notifications[]", :id => notif, :value => notif, :checked => (!disabled_notifications_type.include? notif)}
+          = notif.capitalize
+
+  %br
+
+  %div#notifications_frequency
+    %h5 Choose at which frequency we should send you the notifications
+    - notifications_frequency.each do |notif|
+      .radio
+        %label
+          %input{ :type => "radio", :name => 'notifications_frequency', :id => notif, :value => notif, :checked => (notif == current_frequency)}
+          = notif.capitalize
+
+  %button(type="submit" class="btn btn-default" id="button_save_preferences") Save

@@ -1,0 +1,84 @@
+#top.jumbotron
+  .container
+    %h1<
+      GitHub
+      %span.orange> Notifier
+    %h2 Get email notifications when someone stars or forks<br />one of your GitHub repos and follows/unfollows you.
+    %div.col-md-4.col-md-offset-4
+      %a.btn.btn-lg.btn-block.btn-social.btn-github(href="/authorize")
+        %i.fa.fa-github
+        Sign in with GitHub
+
+.container
+  %h3#features.subhead Features
+  .row.benefits
+    .col-md-4.col-sm-6.benefit
+      .benefit-ball
+        %span.glyphicon.glyphicon-envelope
+      %h3 Never miss an event
+      %p We will send you notifications when someone stars or forks one of your repositories and when someone follows or unfollows you.
+    .col-md-4.col-sm-6.benefit
+      .benefit-ball
+        %span.glyphicon.glyphicon-time
+      %h3 asap, daily or weekly
+      %p Choose the frequency of the notifications that best suits you. We can send you every notification asap or a nice summary daily or weekly.
+    .col-md-4.col-sm-6.benefit
+      .benefit-ball
+        %span.glyphicon.glyphicon-wrench
+      %h3 Set up and forget
+      %p The sign up process takes less than 30 seconds and you will start receiving meaningful notifications without the need of ever doing anything else.
+
+.container-alternate
+  .container#tour
+    %h3#tour-head.subhead Weekly report example
+    .row
+      .col-md-12
+        %img.img-responsive{:src => "img/screenshot1.png"}
+
+.container
+  %h3#faqs.subhead Frequently Asked Questions
+  .row.faqs
+    %p.col-md-4.col-sm-6
+      %strong What is GitHub Notifier?
+      %br
+        GitHub Notifier is a service that helps you keep track of all the events happening to your GitHub user and repositories.<br />
+        If you're watching a lot of repositories and following a lot of people your timeline will most certainly be cluttered in events
+        and it's easy to miss something that could be nice to know, like somebody that starred or started watching
+        one of your repositories or even following you and GitHub Notifier will even let you know when somebody is no longer following you.<br />
+        You can decide how often you wish to receive notifications (as soon as possible or in a nice daily or weekly report) and for which events.
+    %p.col-md-4.col-sm-6
+      %strong Is it free?
+      %br
+        Yes! In the future we may have to offer premium services (eg: better email deliverability, ...)
+        for a small fee should the server costs increase too much.<br />
+        Anyway, since this project is open source you will always be able to just host your own version of GitHub Notifier for free.
+    %p.col-md-4.col-sm-6
+      %strong Is GitHub Notifer open source?
+      %br
+        Yes! We love OSS, so rest assured that this project will always be completely open source.<br />
+        You can find all the code that powers this service on <a href="https://github.com/andreausu/github-notifier">GitHub</a>.<br />
+        You are more than welcome to contibute if you'd like to!
+    %p.col-md-4.col-sm-6
+      %strong Will you send me spam?
+      %br
+        No, never, we all hate spammers so I will never be one.
+    %p.col-md-4.col-sm-6
+      %strong Can I choose to receive only some type of notifications?
+      %br
+        Yes, you can select which type of notifications you wish to receive right from your profile preferences,
+        just login and you'll see the link in the top bar.<br />
+        From there you will also be able to change the notifications frequency.
+
+.container-alternate
+  .container#stack
+    %h3.subhead Stack
+    .row.stack
+      .col-md-10.col-md-offset-1.text-center
+        %a{:href => 'http://www.ruby-lang.org'}
+          %img.img-responsive{:src => "img/stack/ruby.png", :'aria-hidden' => "true", :'data-toggle' => "tooltip", :'data-placement' => "top", :title => "Ruby"}
+        %a{:href => 'http://www.sinatrarb.com'}
+          %img.img-responsive{:src => "img/stack/sinatra.png", :'aria-hidden' => "true", :'data-toggle' => "tooltip", :'data-placement' => "top", :title => "Sinatra"}
+        %a{:href => 'http://redis.io'}
+          %img.img-responsive{:src => "img/stack/redis.png", :'aria-hidden' => "true", :'data-toggle' => "tooltip", :'data-placement' => "top", :title => "Redis"}
+        %a{:href => 'http://sidekiq.org'}
+          %img.img-responsive{:src => "img/stack/sidekiq.png", :'aria-hidden' => "true", :'data-toggle' => "tooltip", :'data-placement' => "top", :title => "Sidekiq"}

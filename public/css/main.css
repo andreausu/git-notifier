@@ -1,0 +1,183 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background: #303030;
+  color: #E4F6FF;
+  font-size: 1.0em;
+  padding: 1.5em 0 0.8em;
+}
+body {
+  font-size: 14px;
+  margin-bottom: 60px;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+}
+.btn {
+  border-radius: 3em;
+}
+.container {
+  max-width: 900px;
+}
+.container-alternate {
+  background: #7BBCD2;
+}
+.first-cnt {
+  margin-top: 58px;
+}
+.navbar {
+  background: #074f66;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  padding: 0.3em 0;
+}
+.navbar .navbar-brand {
+  color: #ffffff;
+  font-size: 1.6em;
+}
+.navbar ul.nav li a {
+  color: #FFC200;
+  padding-left: 0;
+  padding-right: 0;
+  margin: 0 1.5em;
+}
+.nav>li>a:focus, .nav>li>a:hover {
+  background: inherit;
+  background-color: inherit;
+}
+.navbar ul.nav li button {
+  margin: 0.7em 0 0 1em;
+}
+.navbar-toggle {
+  border-color: #ffffff;
+}
+.navbar-toggle > span {
+  background-color: #ffffff;
+}
+.jumbotron {
+  background: #7BBCD2;
+  color: #333;
+  padding: 4.5em 0 3.5em;
+  text-align: center;
+  margin-bottom: 0;
+}
+.jumbotron h1 {
+  color: #074f66;
+  font-size: 4em;
+}
+.jumbotron h2 {
+  font-style: italic;
+  font-weight: normal;
+  line-height: 1.4em;
+  margin-bottom: 1.4em;
+  font-size: 1.5em;
+}
+.orange {
+  color: #eebf3f;
+}
+.btn-github {
+  background: #efc56b;
+  color: #074f66;
+}
+.subhead {
+  font-size: 2em;
+  text-align: center;
+  margin: 2em 0 0.5em;
+}
+.benefits {
+  margin-bottom: 3em;
+}
+.benefit {
+  margin: 1em 0;
+  text-align: center;
+}
+.benefit .benefit-ball {
+  background: #f0f0f0;
+  border-radius: 50%;
+  color: #333;
+  display: inline-block;
+  line-height: 1em;
+  padding: 3em;
+}
+.benefit .benefit-ball .glyphicon {
+  font-size: 3em;
+  position: relative;
+  top: -3px;
+  right: 1px;
+}
+.benefit h3 {
+  font-size: 1.5em;
+}
+#tour {
+  padding-bottom: 3em;
+}
+#tour img {
+  width: 870px;
+}
+#stack {
+  padding-bottom: 3em;
+}
+#stack img {
+  height: 130px;
+  display: inline;
+  padding: 1em;
+}
+#tour-head {
+  margin-bottom: 1em;
+}
+.faqs {
+  margin-bottom: 3em;
+}
+.faqs p {
+  line-height: 1.5em;
+  margin: 1.2em 0;
+}
+footer a:link, footer a:visited, footer a:hover, footer a:active {
+  color: inherit;
+}
+span.footer {
+  padding-right: 5px;
+}
+.hidden {
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  .navbar ul.nav li {
+    text-align: center;
+  }
+  .navbar ul.nav li button {
+    margin: 1em 0;
+  }
+  .jumbotron {
+    font-size: 14px;
+    padding: 6em 0 4em;
+  }
+  .benefit {
+    margin-bottom: 2em;
+  }
+  .jumbotron h1 {
+    font-size: 4em;
+  }
+  .jumbotron h2 {
+    font-size: 1.2em;
+  }
+}
+@media screen and (max-width: 480px) {
+  body {
+    font-size: 12px;
+  }
+  .jumbotron h1 {
+    font-size: 2.7em;
+  }
+  .jumbotron h2 {
+    font-size: 1.0em;
+  }
+}

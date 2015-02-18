@@ -1,0 +1,4 @@
+Before you can start receiving GitHub notifications you need to confirm your email address.
+Please confirm your email address by clicking the link below.
+="\r\n"
+= confirm_link

@@ -1,0 +1,8 @@
+- events.each do |event|
+  =event['text'] + "\r\n"
+
+="\r\n\r\n"
+
+View your full notifications history: #{site_url}
+
+Unsubscribe: #{unsubscribe_url}

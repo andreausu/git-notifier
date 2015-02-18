@@ -1,0 +1,64 @@
+!!! 5
+%html(lang="en")
+  %head
+    %meta(charset="utf-8")
+    %meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
+    %meta(name="viewport" content="width=device-width, initial-scale=1")
+    %title GitHub Notifier#{(defined?(@page_title) ? ' - ' + @page_title : '')}
+
+    %link(href="/css/bootstrap.min.css?v=#{@deploy_id}" rel="stylesheet")
+    %link(href="/css/font-awesome.min.css?v=#{@deploy_id}" rel="stylesheet")
+    %link(href="/css/bootstrap-social.css?v=#{@deploy_id}" rel="stylesheet")
+    %link(href="/css/main.css?v=#{@deploy_id}" rel="stylesheet")
+    %link(href="/css/octicons/octicons.css?v=#{@deploy_id}" rel="stylesheet")
+    %link{:href => "https://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic", :rel => "stylesheet", :type => "text/css"}
+    %link{:href => "https://fonts.googleapis.com/css?family=Montserrat:400,700", :rel => "stylesheet", :type => "text/css"}/
+
+    / HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
+    / WARNING: Respond.js doesn't work if you view the page via file://
+    / [if lt IE 9]
+      %script(src="/js/html5shiv.min.js?v=#{@deploy_id}")
+      %script(src="/js/respond.min.js?v=#{@deploy_id}")
+  %body
+    %nav.navbar.navbar-fixed-top{:role => "navigation"}
+      .container
+        .navbar-header
+          %button.navbar-toggle{"data-target" => ".navbar-ex1-collapse", "data-toggle" => "collapse", :type => "button"}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand.nav-link{:href => "/"} GitHubNotifier
+        .collapse.navbar-collapse.navbar-ex1-collapse
+          %ul.nav.navbar-nav.navbar-right
+            - get_menu().each do |item|
+              %li
+                %a.nav-link{:href => item[:href]} #{item[:desc]}
+
+    - unless defined? index and index
+      .container.first-cnt
+        =get_flash()
+        =yield
+    - else
+      =get_flash(index)
+      =yield
+
+    %footer
+      .container
+        %p.text-center
+          %span.footer
+            %a{:href => "/"} Home
+          %span.footer
+            %a{:href => "/faq"} FAQ
+          %span.footer
+            %a{:href => "mailto:support@githubnotifier.io"} Support
+          %span.footer
+            %a{:href => "https://github.com/andreausu/github-notifier"}
+              %i.fa.fa-github.fa-lg
+          %span.footer
+            %a{:href => "https://twitter.com/githubnotifier"}
+              %i.fa.fa-twitter.fa-lg
+
+  %script(src="/js/jquery.min.js?v=#{@deploy_id}")
+  %script(src="/js/bootstrap.min.js?v=#{@deploy_id}")
+  =get_additional_js()
+  %script(src="/js/app.js?v=#{@deploy_id}")
