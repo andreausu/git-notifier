@@ -547,20 +547,24 @@ class GitHubNotifier < Sinatra::Base
       add_js += "<script src='/js/#{js}?v=#{@deploy_id}'></script>"
     end
 
+    add_js
+  end
+
+  def get_head_js()
+    js = ''
     if defined?(settings.production) && settings.production
       pageView = "ga('send', 'pageview');"
       pageView = "ga('send', 'pageview', '/#{@custom_url}');" if @custom_url
       logged_in = (defined?(session[:github_id]) && session[:github_id] ? 1 : 0)
 
-      add_js += "<script async src='//www.google-analytics.com/analytics.js'></script><script>
+      js += "<script async src='//www.google-analytics.com/analytics.js'></script><script>
         window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
         ga('create', 'UA-59786346-2', 'auto');
         #{pageView}
         ga('set', 'logged_in', #{logged_in});
         </script>"
     end
-
-    add_js
+    js
   end
 
 end

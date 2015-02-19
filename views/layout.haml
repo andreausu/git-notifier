@@ -19,6 +19,7 @@
     / [if lt IE 9]
       %script(src="/js/html5shiv.min.js?v=#{@deploy_id}")
       %script(src="/js/respond.min.js?v=#{@deploy_id}")
+    =get_head_js()
   %body
     %nav.navbar.navbar-fixed-top{:role => "navigation"}
       .container
@@ -58,7 +59,7 @@
             %a{:href => "https://twitter.com/githubnotifier"}
               %i.fa.fa-twitter.fa-lg
 
-  %script(src="/js/jquery.min.js?v=#{@deploy_id}")
-  %script(src="/js/bootstrap.min.js?v=#{@deploy_id}")
-  =get_additional_js()
-  %script(src="/js/app.js?v=#{@deploy_id}")
+    %script(src="/js/jquery.min.js?v=#{@deploy_id}")
+    %script(src="/js/bootstrap.min.js?v=#{@deploy_id}")
+    =get_additional_js()
+    %script(src="/js/app.js?v=#{@deploy_id}")
