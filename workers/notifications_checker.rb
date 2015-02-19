@@ -171,7 +171,7 @@ class NotificationsChecker
         puts "Waiting for some more time before enqueuing the EmailBuilder job"
       end
     when 'weekly'
-      if user['last_email_sent_on'] <= (Time.now.to_i - (60 * 60 * 24 * 7)) # 7 days
+      if user['last_email_sent_on'].to_i <= (Time.now.to_i - (60 * 60 * 24 * 7)) # 7 days
         enqueue = true
         puts "EmailBuilder job enqueued"
       else
