@@ -554,7 +554,7 @@ class GitHubNotifier < Sinatra::Base
 
       add_js += "<script async src='//www.google-analytics.com/analytics.js'></script><script>
         window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-        ga('create', 'UA-59786346-1', 'auto');
+        ga('create', 'UA-59786346-2', 'auto');
         #{pageView}
         ga('set', 'logged_in', #{logged_in});
         </script>"
