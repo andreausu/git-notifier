@@ -35,3 +35,6 @@ notifications_frequency:
   - weekly
 
 deploy_id: 1
+
+email_dev_on_signup: false
+dev_email_address: some@email.com

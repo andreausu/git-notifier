@@ -215,6 +215,14 @@ class GitHubNotifier < Sinatra::Base
       flash.now[:success] = "We have sent an email to #{email}, please open it and click on the link inside to activate your account."
     end
 
+    if settings.CONFIG['email_dev_on_signup']
+      Sidekiq::Client.push(
+        'queue' => 'send_email',
+        'class' => SendEmail,
+        'args' => [settings.CONFIG['dev_email_address'], 'New user signup!', 'text', 'empty', {:content => "A new user just signed up! https://github.com/#{session[:github_login]}"}]
+      )
+    end
+
     haml :preferences, :locals => {
       :disabled_notifications_type => [],
       :current_frequency => 'daily',
@@ -513,7 +521,7 @@ class GitHubNotifier < Sinatra::Base
           {:href => (request.path_info == '/faq' ? '/' : '') + '#tour-head', :desc => 'Tour'},
           {:href => '/faq', :desc => 'FAQ'},
           {:href => (request.path_info == '/faq' ? '/' : '') + '#stack', :desc => 'Stack'},
-          {:href => 'mailto:support@githubnotifier.io', :desc => 'Contact Us'}
+          {:href => "mailto:#{settings.CONFIG['dev_email_address']}", :desc => 'Contact Us'}
         ]
       end
     end
