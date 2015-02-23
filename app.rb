@@ -162,8 +162,7 @@ class GitHubNotifier < Sinatra::Base
 
       NotificationsChecker.perform_async(
         "#{settings.CONFIG['redis']['namespace']}:users:#{user[:id]}",
-        true,
-        session['session_id']
+        true
       )
 
       email_addresses = github.users.emails.list.to_a

@@ -8,18 +8,22 @@ class EmailBuilder
   sidekiq_options :queue => :email_builder
   def perform(events_list_key)
 
-    event_ids = []
-    events = Sidekiq.redis do |conn|
-      conn.lrange(events_list_key, 0, '-1')
-    end
+    events = nil
     user = nil
     emailEvents = []
+    event_ids = []
+
+    Sidekiq.redis do |conn|
+      conn.pipelined do
+        events = conn.lrange(events_list_key, 0, '-1')
+        user = conn.get("#{CONFIG['redis']['namespace']}:users:" + events_list_key.split(':').last)
+      end
+    end
 
     events.each do |event|
       event = JSON.parse(event)
       type = event['type']
       entity = event['entity']
-      user = event['user']
       event_name = ''
 
       next if user['disabled_notifications_type'] && user['disabled_notifications_type'].include?(type)

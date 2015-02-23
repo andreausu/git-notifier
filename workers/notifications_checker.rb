@@ -8,7 +8,7 @@ class NotificationsChecker
   sidekiq_options :queue => :notifications_checker
   @first_time = nil
   @new_events = nil
-  def perform(user_key, first_time = false, user_session_id = nil)
+  def perform(user_key, first_time = false)
     @new_events = []
     puts 'Started processing ' + user_key
     @first_time = first_time
@@ -54,12 +54,12 @@ class NotificationsChecker
           when 'WatchEvent'
             if event[:repo][:name].include? user['login']
               puts "#{event[:actor][:login]} starred your project #{event[:repo][:name]}"
-              on_new_event('star', event, user, user_session_id)
+              on_new_event('star', event)
             end
           when 'ForkEvent'
             if event[:repo][:name].include? user['login']
               puts "#{event[:actor][:login]} forked your project #{event[:repo][:name]}"
-              on_new_event('fork', event, user, user_session_id)
+              on_new_event('fork', event)
             end
           end
         end
@@ -92,14 +92,14 @@ class NotificationsChecker
       new_followers = followers.keys - user['followers']
       unfollowed = user['followers'] - followers.keys
       new_followers.each do |login|
-        on_new_event('follow', followers[login], user, user_session_id)
+        on_new_event('follow', followers[login])
       end
       unfollowed.each do |login|
         begin
           response = github.users.get(user: login)
-          on_new_event('unfollow', response.body, user, user_session_id)
+          on_new_event('unfollow', response.body)
         rescue Github::Error::NotFound
-          on_new_event('deleted', login, user, user_session_id)
+          on_new_event('deleted', login)
         rescue Exception => e
           NewRelic::Agent.notice_error(e)
           puts e.message
@@ -140,7 +140,7 @@ class NotificationsChecker
 
   end
 
-  def on_new_event(type, entity, user, user_session_id)
+  def on_new_event(type, entity)
     timestamp = nil
     unless @first_time
       if type == 'fork' && defined?(entity['payload']['forkee']['created_at'])
@@ -149,7 +149,7 @@ class NotificationsChecker
         timestamp = Time.now.to_i
       end
     end
-    @new_events.unshift({:type => type, :entity => entity, :user => user, :timestamp => timestamp})
+    @new_events.unshift({:type => type, :entity => entity, :timestamp => timestamp})
   end
 
   def enqueue_email_builder(user)
