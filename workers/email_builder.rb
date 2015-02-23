@@ -14,10 +14,8 @@ class EmailBuilder
     event_ids = []
 
     Sidekiq.redis do |conn|
-      conn.pipelined do
-        events = conn.lrange(events_list_key, 0, '-1')
-        user = conn.hgetall("#{CONFIG['redis']['namespace']}:users:" + events_list_key.split(':').last)
-      end
+      events = conn.lrange(events_list_key, 0, '-1')
+      user = conn.hgetall("#{CONFIG['redis']['namespace']}:users:" + events_list_key.split(':').last)
     end
 
     events.each do |event|
