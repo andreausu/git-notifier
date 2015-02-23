@@ -86,7 +86,7 @@ class GitHubNotifier < Sinatra::Base
   get '/authorize' do
     begin
       github = Github.new(client_id: settings.CONFIG['github']['client_id'], client_secret: settings.CONFIG['github']['client_secret'])
-      redirect github.authorize_url scope: 'user'
+      redirect github.authorize_url scope: 'user:email,notifications'
     rescue Exception => e
       NewRelic::Agent.notice_error(e)
       flash[:danger] = 'We experienced an error while connecting to GitHub, please try again.'
@@ -143,20 +143,32 @@ class GitHubNotifier < Sinatra::Base
       current_timestamp = Time.now.to_i
 
       Sidekiq.redis do |conn|
+
+        userExists = conn.exists("#{settings.CONFIG['redis']['namespace']}:users:#{user[:id]}")
+
         conn.multi do
-          conn.hmset(
-            "#{settings.CONFIG['redis']['namespace']}:users:#{user[:id]}",
-            :login, user[:login],
-            :last_event_id, 0,
-            :token, session[:github_token],
-            :github_id, user[:id],
-            :registered_on, current_timestamp,
-            :notifications_frequency, 'daily',
-            :last_email_sent_on, current_timestamp,
-            :first_check_completed, 0,
-            :email_confirmed, 0
-          )
           conn.set("#{settings.CONFIG['redis']['namespace']}:tokens:#{token.token}", user[:id])
+          if userExists
+            # The user already exists, just update the token
+            conn.hset(
+              "#{settings.CONFIG['redis']['namespace']}:users:#{user[:id]}",
+              :token, session[:github_token]
+            )
+            redirect '/', 302
+          else
+            conn.hmset(
+              "#{settings.CONFIG['redis']['namespace']}:users:#{user[:id]}",
+              :login, user[:login],
+              :last_event_id, 0,
+              :token, session[:github_token],
+              :github_id, user[:id],
+              :registered_on, current_timestamp,
+              :notifications_frequency, 'daily',
+              :last_email_sent_on, current_timestamp,
+              :first_check_completed, 0,
+              :email_confirmed, 0
+            )
+          end
         end
       end
 
