@@ -142,6 +142,8 @@ class GitHubNotifier < Sinatra::Base
 
       current_timestamp = Time.now.to_i
 
+      userExists = nil
+
       Sidekiq.redis do |conn|
 
         userExists = conn.exists("#{settings.CONFIG['redis']['namespace']}:users:#{user[:id]}")
@@ -152,9 +154,9 @@ class GitHubNotifier < Sinatra::Base
             # The user already exists, just update the token
             conn.hset(
               "#{settings.CONFIG['redis']['namespace']}:users:#{user[:id]}",
-              :token, token.token
+              :token,
+              token.token
             )
-            redirect '/', 302
           else
             conn.hmset(
               "#{settings.CONFIG['redis']['namespace']}:users:#{user[:id]}",
@@ -170,6 +172,10 @@ class GitHubNotifier < Sinatra::Base
             )
           end
         end
+      end
+
+      if userExists
+        redirect '/', 302
       end
 
       NotificationsChecker.perform_async(
