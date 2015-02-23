@@ -152,7 +152,7 @@ class GitHubNotifier < Sinatra::Base
             # The user already exists, just update the token
             conn.hset(
               "#{settings.CONFIG['redis']['namespace']}:users:#{user[:id]}",
-              :token, session[:github_token]
+              :token, token.token
             )
             redirect '/', 302
           else
@@ -160,7 +160,7 @@ class GitHubNotifier < Sinatra::Base
               "#{settings.CONFIG['redis']['namespace']}:users:#{user[:id]}",
               :login, user[:login],
               :last_event_id, 0,
-              :token, session[:github_token],
+              :token, token.token,
               :github_id, user[:id],
               :registered_on, current_timestamp,
               :notifications_frequency, 'daily',
