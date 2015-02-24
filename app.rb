@@ -87,7 +87,7 @@ class GitHubNotifier < Sinatra::Base
   get '/authorize' do
     begin
       github = Github.new(client_id: settings.CONFIG['github']['client_id'], client_secret: settings.CONFIG['github']['client_secret'])
-      redirect github.authorize_url scope: 'user:email,notifications'
+      redirect github.authorize_url scope: 'user:email'
     rescue Exception => e
       NewRelic::Agent.notice_error(e)
       flash[:danger] = 'We experienced an error while connecting to GitHub, please try again.'
