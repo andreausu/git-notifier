@@ -185,6 +185,7 @@ class GitHubNotifier < Sinatra::Base
       )
 
       email_addresses = github.users.emails.list.to_a
+      email_addresses.map! { |em| em.is_a? String ? em : em.email}
       @additional_js = ['mailcheck.min.js']
       haml :signup, :locals => {:email_addresses => email_addresses}
     end
