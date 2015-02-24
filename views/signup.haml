@@ -4,8 +4,8 @@
     - email_addresses.each do |email|
       .radio
         %label
-          %input(type="radio" name="email" value="#{email.email}" checked)
-          = email.email
+          %input(type="radio" name="email" value="#{email}" checked)
+          = email
     .radio
       %label
         %input(type="radio" name="email" id="other_email_radio" value="other_email")
