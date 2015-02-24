@@ -66,7 +66,7 @@ class GitHubNotifier < Sinatra::Base
         )
 
         email_addresses = github.users.emails.list.to_a
-        email_addresses.map! { |e| e.is_a? String ? e : e.email}
+        email_addresses.map! { |e| e.is_a?(String) ? e : e.email}
         @additional_js = ['mailcheck.min.js']
         @custom_url = 'signup/homepage'
         NewRelic::Agent.set_transaction_name("GitHubNotifier/GET #{@custom_url}")
@@ -185,7 +185,7 @@ class GitHubNotifier < Sinatra::Base
       )
 
       email_addresses = github.users.emails.list.to_a
-      email_addresses.map! { |em| em.is_a? String ? em : em.email}
+      email_addresses.map! { |em| em.is_a?(String) ? em : em.email}
       @additional_js = ['mailcheck.min.js']
       haml :signup, :locals => {:email_addresses => email_addresses}
     end
