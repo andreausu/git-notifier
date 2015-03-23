@@ -27,7 +27,7 @@ end
 #Sidekiq::Client.push(
 #  'queue' => 'send_email_signup',
 #  'class' => SendEmail,
-#  'args' => ['andreausu@gmail.com', "Confirm your GitHub Notifer email!", 'html', 'confirm', {:confirm_link => 'https://staging.githubnotifier.io/signup/confirm?id=623986&email=andreausu%2Bstaging%40gmail.com&expiry=1454598210&v=953ff69c7ddeaf10aeda12a6eec032a92c21511fb5f87dff1130904cfe0b3143570bd5dfc64062c84fbf1c54995e894d1f51fb126cfd1e3dd916c04ef6b86e35'}]
+#  'args' => ['andreausu@gmail.com', "Confirm your GitHub Notifer email!", 'html', 'confirm', {:confirm_link => 'https://staging.gitnotifier.io/signup/confirm?id=623986&email=andreausu%2Bstaging%40gmail.com&expiry=1454598210&v=953ff69c7ddeaf10aeda12a6eec032a92c21511fb5f87dff1130904cfe0b3143570bd5dfc64062c84fbf1c54995e894d1f51fb126cfd1e3dd916c04ef6b86e35'}]
 #)
 
 Sidekiq::Client.push(
@@ -70,8 +70,8 @@ Sidekiq::Client.push(
             :day => "Sunday, February 10"
           },
         ],
-      :site_url => "https://githubnotifier.io",
-      :unsubscribe_url => "https://githubnotifier.io"
+      :site_url => "https://gitnotifier.io",
+      :unsubscribe_url => "https://gitnotifier.io"
     }
   ]
 )

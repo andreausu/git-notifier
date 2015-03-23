@@ -3,7 +3,7 @@
   %head
     %meta{:content => "width=device-width", :name => "viewport"}
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
-    %title Confirm your GitHub Notfier email address!
+    %title Git Notfier
     :css
       img {
       max-width: 100%;
@@ -64,13 +64,7 @@
                         Git Notifier
                     %tr{:style => "font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"}
                       %td.content-block{:style => "font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;", :valign => "top"}
-                        Before you can start receiving GitHub notifications you need to confirm your email address.
-                    %tr{:style => "font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"}
-                      %td.content-block{:style => "font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;", :valign => "top"}
-                        Please confirm your email address by clicking the link below.
-                    %tr{:style => "font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"}
-                      %td.content-block{:style => "font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;", :valign => "top"}
-                        %a.btn-primary{:href => confirm_link, :style => "font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; color: #FFF; text-decoration: none; line-height: 2; font-weight: bold; text-align: center; cursor: pointer; display: inline-block; border-radius: 5px; text-transform: capitalize; background: #efae3c; margin: 0; border-color: #efae3c; border-style: solid; border-width: 10px 20px;"} Confirm email address
+                        = content
                     %tr{:style => "font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"}
                       %td.content-block{:style => "font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;", :valign => "top"}
                         \- The Git Notifier Team
@@ -78,7 +72,8 @@
               %table{:style => "font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;", :width => "100%"}
                 %tr{:style => "font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"}
                   %td.aligncenter.content-block{:align => "center", :style => "font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 12px; vertical-align: top; text-align: center; margin: 0; padding: 0 0 20px;", :valign => "top"}
-                    Follow
+                    %a{:href => unsubscribe_url, :style => "font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 12px; color: #999; text-decoration: underline; margin: 0;"} Unsubscribe
+                    | Follow
                     %a{:href => "https://twitter.com/gitnotifier", :style => "font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 12px; color: #999; text-decoration: underline; margin: 0;"} @GitNotifier
                     on Twitter.
         %td{:style => "font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;", :valign => "top"}

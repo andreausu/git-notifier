@@ -5,7 +5,7 @@ require 'json'
 require 'github_api'
 require 'pp'
 
-class GitHubNotifier < Sinatra::Base
+class GitNotifier < Sinatra::Base
 
   @additional_js = nil
 
@@ -69,13 +69,13 @@ class GitHubNotifier < Sinatra::Base
         email_addresses.map! { |e| e.is_a?(String) ? e : e.email}
         @additional_js = ['mailcheck.min.js']
         @custom_url = 'signup/homepage'
-        NewRelic::Agent.set_transaction_name("GitHubNotifier/GET #{@custom_url}")
+        NewRelic::Agent.set_transaction_name("GitNotifier/GET #{@custom_url}")
         haml :signup, :locals => {:email_addresses => email_addresses}
       else
         session[:email] = email
         @additional_js = ['spin.js', 'jquery.spin.js']
         @custom_url = 'timeline'
-        NewRelic::Agent.set_transaction_name("GitHubNotifier/GET #{@custom_url}")
+        NewRelic::Agent.set_transaction_name("GitNotifier/GET #{@custom_url}")
         @page_title = 'Profile'
         haml :events, :locals => {:github_id => session[:github_id]}
       end

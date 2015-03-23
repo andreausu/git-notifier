@@ -2,7 +2,7 @@
 lock '3.3.5'
 
 set :application, 'github-notifier'
-set :repo_url, 'git@github.com:andreausu/github-notifier.git'
+set :repo_url, 'git@github.com:andreausu/git-notifier.git'
 
 set :branch, ENV["REVISION"] || ENV["BRANCH_NAME"] || ask('the branch or revison to deploy', `git rev-parse --abbrev-ref HEAD`.chomp) unless ARGV[1] && ARGV[1].include?('rollback')
 # We need /usr/sbin/service

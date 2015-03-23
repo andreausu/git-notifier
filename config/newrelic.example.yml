@@ -49,7 +49,7 @@ common: &default_settings
   # See https://newrelic.com/docs/site/renaming-applications for more details
   # on renaming your New Relic applications.
   #
-  app_name: GitHub Notifier
+  app_name: Git Notifier
 
   # When "true", the agent collects performance data about your
   # application and reports this data to the New Relic service at
@@ -192,7 +192,7 @@ development:
   <<: *default_settings
   # Turn on communication to New Relic service in development mode
   monitor_mode: true
-  app_name: GitHub Notifier (Development)
+  app_name: Git Notifier (Development)
 
   # Rails Only - when running in Developer Mode, the New Relic Agent will
   # present performance information on the last 100 transactions you have
@@ -221,4 +221,4 @@ production:
 staging:
   <<: *default_settings
   monitor_mode: true
-  app_name: GitHub Notifier (Staging)
+  app_name: Git Notifier (Staging)

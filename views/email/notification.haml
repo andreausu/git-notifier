@@ -3,7 +3,7 @@
   %head
     %meta{:content => "width=device-width", :name => "viewport"}
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
-    %title Confirm your GitHub Notfier email address!
+    %title Git Notifier notification
     :css
       img {
       max-width: 100%;
@@ -61,7 +61,7 @@
                   %table{:cellpadding => "0", :cellspacing => "0", :style => "font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;", :width => "100%"}
                     %tr{:style => "font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"}
                       %td.aligncenter.content-block{:align => "center", :style => "font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 25px; font-weight: bold; vertical-align: top; margin: 0; padding: 0;", :valign => "top"}
-                        GitHub Notifier
+                        Git Notifier
                     - events.each do |event|
                       - if defined?(event['day']) && !event['day'].nil?
                         %tr{:style => "font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"}

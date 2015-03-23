@@ -1,9 +1,9 @@
-GitHub Notifier
+Git Notifier
 ==============================
 
 [![Build Status](https://travis-ci.org/andreausu/github-notifier.svg?branch=travis)](https://travis-ci.org/andreausu/github-notifier) [![Dependency Status](https://gemnasium.com/andreausu/github-notifier.svg)](https://gemnasium.com/andreausu/github-notifier)
 
-GitHub Notifier is a Sinatra app that makes possible to receive email notifications for interesting GitHub events.
+Git Notifier is a Sinatra app that makes possible to receive email notifications for interesting GitHub events.
 
 The supported events are:
 - A user stars one of your repositories
@@ -12,14 +12,14 @@ The supported events are:
 - A user unfollows you
 - A user that was following you was deleted
 
-GitHub Notifier lets a GitHub user signup via OAuth and choose which type of notifications the user wishes to receive and at which frequency (asap, or in a nice daily or weekly report).
+Git Notifier lets a GitHub user signup via OAuth and choose which type of notifications the user wishes to receive and at which frequency (asap, or in a nice daily or weekly report).
 
-You can take a look and use this project in production here: https://githubnotifier.io
+You can take a look and use this project in production here: https://gitnotifier.io
 
 Weekly report example
 ------------
 
-![Weekly report example](https://githubnotifier.io/img/screenshot1.png)
+![Weekly report example](https://gitnotifier.io/img/screenshot1.png)
 
 Installation
 ------------

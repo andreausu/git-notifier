@@ -1,6 +1,6 @@
 {
-  "name": "github-notifier",
-  "version": "0.1.0",
+  "name": "git-notifier",
+  "version": "0.2.0",
   "authors": [
     "Andrea Usuelli <andreausu@gmail.com>"
   ],

@@ -12,5 +12,5 @@ set :sidekiq_env, :production
 set :sidekiq_concurrency, 25
 set :newrelic_rails_env, 'production'
 
-role :web, %w{ghntfr@web01.githubnotifier.io:91}
-role :sidekiq,  %w{ghntfr@web01.githubnotifier.io:91}
+role :web, %w{ghntfr@web01.gitnotifier.io:91}
+role :sidekiq,  %w{ghntfr@web01.gitnotifier.io:91}

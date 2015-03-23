@@ -70,7 +70,7 @@ class EmailBuilder
     unsubscribe_url = URI.escape("https://#{CONFIG['domain']}/unsubscribe?id=#{user['github_id']}&expiry=#{expiry}&v=#{hmac}")
 
     to = user['email']
-    subject = 'GitHub Notifier'
+    subject = 'Git Notifier'
     case user['notifications_frequency']
     when 'asap'
       subject += ' notification'

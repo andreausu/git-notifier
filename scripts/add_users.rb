@@ -11,7 +11,7 @@ redis = Redis.new(:driver => :hiredis, :host => CONFIG['redis']['host'], :port =
 obj = {"github_id"=> "",
  "last_event_id"=>"2425257958",
  "followers"=>
-  "[\"matteosister\",\"frapontillo\",\"robbixc\",\"alpacaaa\",\"davidefedrigo\",\"rvitaliy\",\"aleinside\",\"thomasvargiu\",\"runcom\",\"anatolinicolae\",\"giordan83\",\"maxcanna\",\"peelandsee\",\"nigrosimone\",\"squaini\",\"riccamastellone\",\"usutest\",\"githubnotifier\"]",
+  "[\"matteosister\",\"frapontillo\",\"robbixc\",\"alpacaaa\",\"davidefedrigo\",\"rvitaliy\",\"aleinside\",\"thomasvargiu\",\"runcom\",\"anatolinicolae\",\"giordan83\",\"maxcanna\",\"peelandsee\",\"nigrosimone\",\"squaini\",\"riccamastellone\",\"usutest\",\"gitnotifier\"]",
  "registered_on"=>"1416911683",
  "last_email_sent_on"=>"1424189703",
  "login"=>"andreausu",

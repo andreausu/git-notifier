@@ -21,8 +21,8 @@ casper.test.on('fail', function () {
 });
 
 casper.test.begin("Signup process", 24, function suite(test) {
-  casper.start("http://githubnotifier.local/", function() {
-    test.assertTitle("GitHub Notifier - Notifications for stars, forks, follow and unfollow", "Page title is correct");
+  casper.start("http://gitnotifier.local/", function() {
+    test.assertTitle("Git Notifier - Notifications for stars, forks, follow and unfollow", "Page title is correct");
     test.assertExists('a.btn-github', "Signup button found");
     this.click('a.btn-github');
   });
@@ -44,19 +44,19 @@ casper.test.begin("Signup process", 24, function suite(test) {
   });
 
   casper.then(function() {
-    test.assertUrlMatch(/githubnotifier/, "We are back on GitHub Notifier");
+    test.assertUrlMatch(/gitnotifier/, "We are back on Git Notifier");
     this.waitForSelector('button#signup_button', function() {
       test.assertVisible('input[name="email"]', 'Main email is visible');
       test.assertVisible('input[name="other_email"]', 'Other email is visible');
       test.assertVisible('button#signup_button', 'Signup button is visible');
       this.click('input#other_email_radio');
       this.fillSelectors('form#signup', {
-          'input[name="other_email"]' : 'githubnotifier@gnail.com',
+          'input[name="other_email"]' : 'gitnotifier@gnail.com',
       }, false);
       this.waitUntilVisible('div#other_email_suggestion a.domain', function() {
         test.assertVisible('div#other_email_suggestion a.domain', 'Wrong domain suggestion is visible');
         this.click('div#other_email_suggestion a.domain');
-        test.assertField({type: 'css', path: 'input#other_email'}, 'githubnotifier@gmail.com', 'Domain replaced!');
+        test.assertField({type: 'css', path: 'input#other_email'}, 'gitnotifier@gmail.com', 'Domain replaced!');
         this.wait('500', function() {
           test.assertNotVisible('div#other_email_suggestion a.domain', 'Suggestion is not visible anymore');
           this.click('button#signup_button');
@@ -67,7 +67,7 @@ casper.test.begin("Signup process", 24, function suite(test) {
 
   casper.then(function() {
     this.waitUntilVisible('button#button_save_preferences', function() {
-      test.assertTextExists('We have sent an email to githubnotifier@gmail.com, please open it and click on the link inside to activate your account', 'Flash alert "confirm e-mail address" is present');
+      test.assertTextExists('We have sent an email to gitnotifier@gmail.com, please open it and click on the link inside to activate your account', 'Flash alert "confirm e-mail address" is present');
       test.assertVisible('div.alert.alert-success', 'Flash alert "confirm e-mail address" is visible');
       test.assertTextExists('Choose the type of notifications you wish to receive', 'Text type of notifications is present');
       test.assertTextExists('Choose at which frequency we should send you the notifications', 'Text frequency of notifications is present');

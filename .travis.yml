@@ -26,4 +26,4 @@ script:
 
 addons:
   hosts:
-    - githubnotifier.local
+    - gitnotifier.local

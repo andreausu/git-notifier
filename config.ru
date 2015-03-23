@@ -13,4 +13,4 @@ require_relative 'app.rb'
 require 'newrelic-redis'
 require 'newrelic_rpm' # it should be the last entry in the require list
 
-run GitHubNotifier
+run GitNotifier

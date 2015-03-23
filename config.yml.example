@@ -11,7 +11,7 @@ redis:
 
 mail:
     method: smtp
-    from: GitHub Notifier <sender@email.com>
+    from: Git Notifier <sender@email.com>
     host: smtp.example.org
     port: 587
     user: someuser@somedomain.com
