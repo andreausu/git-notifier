@@ -13,5 +13,5 @@ set :sidekiq_env, :staging
 set :sidekiq_concurrency, 2
 set :newrelic_rails_env, 'staging'
 
-role :web, %w{ghntfr@web01.usu.li:91}
-role :sidekiq,  %w{ghntfr@web01.usu.li:91}
+role :web, %w{ghntfr@dedi01.usu.li:91}
+role :sidekiq,  %w{ghntfr@dedi01.usu.li:91}
