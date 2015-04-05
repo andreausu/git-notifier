@@ -9,10 +9,10 @@ gem 'json', '~> 1.8.1'
 gem 'sidekiq', '~> 3.3.2'
 gem 'mail', '~> 2.6.3'
 gem 'puma', '~> 2.11.1'
-gem 'newrelic_rpm', '~> 3.10.0.279'
+gem 'newrelic_rpm', '~> 3.11.0.0'
 gem 'rack_csrf', '~> 2.5.0'
 gem 'rack-flash3', '~> 1.0.5'
-gem 'newrelic-redis', '~> 1.5.0'
+gem 'newrelic-redis', '~> 2.0.0'
 gem 'sinatra-contrib', '~> 1.4.2'
 gem 'capistrano', '~> 3.3.0', group: :development
 gem 'capistrano3-puma', '~> 0.8.5', group: :development
