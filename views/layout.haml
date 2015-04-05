@@ -4,7 +4,7 @@
     %meta(charset="utf-8")
     %meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
     %meta(name="viewport" content="width=device-width, initial-scale=1")
-    %title Git Notifier#{(defined?(@page_title) ? ' - ' + @page_title : '')}
+    %title GitNotifier#{(defined?(@page_title) ? ' - ' + @page_title : '')}
 
     %link(href="/css/bootstrap.min.css?v=#{@deploy_id}" rel="stylesheet")
     %link(href="/css/font-awesome.min.css?v=#{@deploy_id}" rel="stylesheet")
@@ -28,7 +28,7 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.navbar-brand.nav-link{:href => "/"} Git Notifier
+          %a.navbar-brand.nav-link{:href => "/"} GitNotifier
         .collapse.navbar-collapse.navbar-ex1-collapse
           %ul.nav.navbar-nav.navbar-right
             - get_menu().each do |item|
