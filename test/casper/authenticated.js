@@ -8,7 +8,7 @@ casper.test.setUp(function () {
 
 casper.test.begin("Home page", 3, function suite(test) {
   casper.start("http://gitnotifier.local/", function() {
-    test.assertTitle("Git Notifier - Profile", "Page title is correct");
+    test.assertTitle("GitNotifier - Profile", "Page title is correct");
     test.assertExists('table#events', "Events table found found");
     test.assertEval(function() {
             return __utils__.findAll("table#events tr").length >= 5;
