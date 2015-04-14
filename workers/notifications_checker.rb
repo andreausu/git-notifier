@@ -5,7 +5,7 @@ require 'net/http'
 
 class NotificationsChecker
   include Sidekiq::Worker
-  sidekiq_options :queue => :notifications_checker
+  sidekiq_options :queue => :notifications_checker, :retry => false, :dead => false
   @first_time = nil
   @new_events = nil
   def perform(user_key, first_time = false)
