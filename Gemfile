@@ -14,6 +14,3 @@ gem 'rack_csrf', '~> 2.5.0'
 gem 'rack-flash3', '~> 1.0.5'
 gem 'newrelic-redis', '~> 2.0.0'
 gem 'sinatra-contrib', '~> 1.4.2'
-gem 'capistrano', '~> 3.3.0', group: :development
-gem 'capistrano3-puma', '~> 0.8.5', group: :development
-gem 'capistrano-sidekiq', '~> 0.4.0', group: :development
