@@ -1,0 +1,51 @@
+## Customize the test machine
+machine:
+  services:
+    - docker
+
+  timezone:
+    America/Los_Angeles # Set the timezone
+
+  node:
+    version: 0.12.0
+
+  # Override /etc/hosts
+  hosts:
+    gitnotifier.local: 127.0.0.1
+
+dependencies:
+  override:
+    - sudo curl -L https://github.com/docker/compose/releases/download/1.3.3/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+    - sudo chmod +x /usr/local/bin/docker-compose
+    - npm install -g casperjs@1.1.0-beta3
+    - cp config/docker.env.example config/docker.env
+    - sed -i 's/APP_CONFIG_GITHUB_CLIENT_ID=.*/APP_CONFIG_GITHUB_CLIENT_ID='"$APP_CONFIG_GITHUB_CLIENT_ID"'/g' config/docker.env
+    - sed -i 's/APP_CONFIG_GITHUB_CLIENT_SECRET=.*/APP_CONFIG_GITHUB_CLIENT_SECRET='"$APP_CONFIG_GITHUB_CLIENT_SECRET"'/g' config/docker.env
+    - bower install
+    - docker-compose build
+    - docker-compose up -d
+
+test:
+  override:
+    - casperjs test test/casper/unauthenticated.js
+  post:
+    - docker ps -a | grep gitnotifier_ | awk '{print $1}' | xargs -n 1 docker logs
+    - docker-compose kill
+    - sudo git reset --hard
+    - sudo git clean -f -x -d
+
+deployment:
+  hub:
+    branch: /.*/
+    commands:
+      - docker login -e "$DOCKER_EMAIL" -u "$DOCKER_USER" -p "$DOCKER_PASS"
+      - bower install
+      - docker build -f Dockerfile_puma -t andreausu/ghntfr-puma .
+      - docker build -f Dockerfile_sidekiq -t andreausu/ghntfr-sidekiq .
+      - docker build -f Dockerfile_enqueuer -t andreausu/ghntfr-enqueuer .
+      - docker tag andreausu/ghntfr-puma andreausu/ghntfr-puma:`echo "$CIRCLE_BRANCH" | sed 's/[^a-zA-Z0-9_\-]/-/g'`
+      - docker tag andreausu/ghntfr-sidekiq andreausu/ghntfr-sidekiq:`echo "$CIRCLE_BRANCH" | sed 's/[^a-zA-Z0-9_\-]/-/g'`
+      - docker tag andreausu/ghntfr-enqueuer andreausu/ghntfr-enqueuer:`echo "$CIRCLE_BRANCH" | sed 's/[^a-zA-Z0-9_\-]/-/g'`
+      - docker push andreausu/ghntfr-puma:`echo "$CIRCLE_BRANCH" | sed 's/[^a-zA-Z0-9_\-]/-/g'`
+      - docker push andreausu/ghntfr-sidekiq:`echo "$CIRCLE_BRANCH" | sed 's/[^a-zA-Z0-9_\-]/-/g'`
+      - docker push andreausu/ghntfr-enqueuer:`echo "$CIRCLE_BRANCH" | sed 's/[^a-zA-Z0-9_\-]/-/g'`

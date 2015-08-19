@@ -1,0 +1,37 @@
+upstream puma {
+  server puma:9292 fail_timeout=0;
+}
+
+server {
+  listen 80;
+  server_name APP_CONFIG_DOMAIN;
+  root /var/www/github-notifier/current/public;
+
+  access_log   /var/log/nginx/github.notifier.production.access.log  main;
+  error_log    /var/log/nginx/github.notifier.production.error.log;
+
+  location ~ ^/(img/|css/|js/|fonts/|humans.txt) {
+    expires max;
+    add_header Pragma public;
+    add_header Cache-Control "public";
+  }
+
+  location = /robots.txt {
+    return 200 "User-agent: *\nAllow: /";
+    expires max;
+    add_header Pragma public;
+    add_header Cache-Control "public";
+  }
+
+  location / {
+    try_files $uri @app;
+  }
+
+  location @app {
+    proxy_http_version 1.1;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $http_host;
+    proxy_redirect off;
+    proxy_pass http://puma;
+  }
+}

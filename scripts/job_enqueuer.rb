@@ -39,6 +39,9 @@ end
 
 Sidekiq::Client.push_bulk('queue' => 'notifications_checker', 'class' => NotificationsChecker, 'args' => jobs_args)
 
+users_keys = nil
+jobs_args = nil
+GC.start
 
 cmds = []
 jobs_args = []
@@ -76,7 +79,7 @@ cmds.each do |c|
       puts "#{Time.now.strftime("%Y-%m-%dT%l:%M:%S%z")} Waiting for some more time before enqueuing the EmailBuilder job"
     end
   when 'weekly'
-    if user['last_email_sent_on'] <= (Time.now.to_i - (60 * 60 * 24 * 7)) # 7 days
+    if user['last_email_sent_on'].to_i <= (Time.now.to_i - (60 * 60 * 24 * 7)) # 7 days
       jobs_args << [new_key]
       puts "#{Time.now.strftime("%Y-%m-%dT%l:%M:%S%z")} EmailBuilder job enqueued"
     else

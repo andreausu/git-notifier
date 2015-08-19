@@ -1,25 +1,27 @@
 ---
 github:
-    client_id: someid
-    client_secret: somesecret
+    client_id: APP_CONFIG_GITHUB_CLIENT_ID
+    client_secret: APP_CONFIG_GITHUB_CLIENT_SECRET
 
 redis:
-    host: localhost
-    port: 6379
-    db: 1
-    namespace: ghntfr
+    host: APP_CONFIG_REDIS_HOST # localhost
+    port: APP_CONFIG_REDIS_PORT # 6379
+    db: APP_CONFIG_REDIS_DB # 0
+    namespace: APP_CONFIG_REDIS_NAMESPACE # ghntfr
 
 mail:
-    method: smtp
-    from: Git Notifier <sender@email.com>
-    host: smtp.example.org
-    port: 587
-    user: someuser@somedomain.com
-    password: somepass
+    enabled: APP_CONFIG_MAIL_ENABLE # true
+    method: APP_CONFIG_MAIL_METHOD # smtp
+    from: APP_CONFIG_MAIL_FROM # Git Notifier <sender@email.com>
+    host: APP_CONFIG_MAIL_HOST # smtp.example.org
+    port: APP_CONFIG_MAIL_PORT # 587
+    user: APP_CONFIG_MAIL_USER # someuser@somedomain.com
+    password: APP_CONFIG_MAIL_PASSWORD # somepass
+    ssl: APP_CONFIG_MAIL_SSL # true
 
-domain: localhost:4567
+domain: APP_CONFIG_DOMAIN # localhost:4567
 
-secret: somesecretzzz
+secret: APP_CONFIG_SECRET # somesecret
 
 notifications_type:
   - star
@@ -34,7 +36,7 @@ notifications_frequency:
   - daily
   - weekly
 
-deploy_id: 1
+deploy_id: APP_CONFIG_DEPLOY_ID # 1
 
-email_dev_on_signup: false
-dev_email_address: some@email.com
+email_dev_on_signup: APP_CONFIG_EMAIL_DEV_ON_SIGNUP # false
+dev_email_address: APP_CONFIG_DEV_EMAIL_ADDRESS # some@email.com

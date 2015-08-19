@@ -20,7 +20,7 @@ directory @dir
 # The default is “false”.
 #
 # daemonize
-daemonize true
+daemonize false
 
 # Store the pid of the server in the file at “path”.
 #
@@ -35,7 +35,7 @@ state_path "#{@dir}/tmp/pids/puma.state"
 # (“append”) specifies whether the output is appended, the default is
 # “false”.
 #
-stdout_redirect "#{@dir}/log/puma.stdout", "#{@dir}/log/puma.stderr", true
+#stdout_redirect "#{@dir}/log/puma.stdout", "#{@dir}/log/puma.stderr", true
 
 # Disable request logging.
 #
@@ -60,7 +60,8 @@ threads 0, 32
 # bind 'unix:///var/run/puma.sock?umask=0111'
 # bind 'ssl://127.0.0.1:9292?key=path_to_key&cert=path_to_cert'
 
-bind "unix://#{@dir}/tmp/sockets/puma.sock"
+bind 'tcp://0.0.0.0:9292'
+#bind "unix://#{@dir}/tmp/sockets/puma.sock"
 
 # Instead of “bind 'ssl://127.0.0.1:9292?key=path_to_key&cert=path_to_cert'” you
 # can also use the “ssl_bind” option.

@@ -3,7 +3,8 @@ config.yml
 config/newrelic.yml
 config/docker.env
 log/*
-bower_components/
-.git_old*
+#bower_components/
+tmp/pids/*
+tmp/sockets/*
 scripts/notes.txt
 .capistrano/

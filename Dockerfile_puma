@@ -1,0 +1,28 @@
+FROM ruby:2.2-onbuild
+
+# Set proper locale
+ENV LANG C.UTF-8
+
+EXPOSE 9292
+
+ENV APP_ENV development
+ENV APP_CONFIG_GITHUB_CLIENT_ID someid
+ENV APP_CONFIG_GITHUB_CLIENT_SECRET somesecret
+
+ENV APP_CONFIG_REDIS_HOST localhost
+ENV APP_CONFIG_REDIS_PORT 6379
+ENV APP_CONFIG_REDIS_DB 1
+ENV APP_CONFIG_REDIS_NAMESPACE ghntfr
+
+ENV APP_CONFIG_DOMAIN gitnotifier.local
+
+ENV APP_CONFIG_SECRET somesecret
+
+ENV APP_CONFIG_DEPLOY_ID 1
+
+ENV APP_CONFIG_EMAIL_DEV_ON_SIGNUP false
+ENV APP_CONFIG_DEV_EMAIL_ADDRESS some@email.com
+
+ADD ./docker/puma/entrypoint.sh /entrypoint.sh
+
+ENTRYPOINT [ "/entrypoint.sh" ]

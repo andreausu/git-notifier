@@ -46,16 +46,14 @@ class SendEmail
     if CONFIG['mail']['method'] == 'sendmail'
       mail.delivery_method(:sendmail)
     else
-      mail.delivery_method(
-        :smtp,
-        address: CONFIG['mail']['host'],
-        port: CONFIG['mail']['port'],
-        user_name: CONFIG['mail']['user'],
-        password: CONFIG['mail']['password']
-      )
+      opts = {address: CONFIG['mail']['host'], port: CONFIG['mail']['port'], enable_starttls_auto: CONFIG['mail']['ssl']}
+      opts[:user_name] = CONFIG['mail']['user'] unless CONFIG['mail']['user'].empty?
+      opts[:password] = CONFIG['mail']['password'] unless CONFIG['mail']['password'].empty?
+
+      mail.delivery_method(:smtp, opts)
     end
 
-    mail.deliver
+    mail.deliver if CONFIG['mail']['enabled']
 
     Sidekiq.redis do |conn|
       conn.hset(user_id, :last_email_sent_on, Time.now.to_i) if user_id

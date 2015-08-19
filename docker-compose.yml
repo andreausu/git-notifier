@@ -1,0 +1,35 @@
+sidekiq:
+  build: .
+  dockerfile: Dockerfile_sidekiq
+  links:
+    - redis
+  volumes:
+    - .:/usr/src/app
+  env_file: config/docker.env
+
+nginx:
+  build: .
+  dockerfile: Dockerfile_nginx
+  links:
+    - puma
+  ports:
+    - "80:80"
+    - "443:443"
+  volumes:
+    - .:/var/www/github-notifier/current
+  env_file: config/docker.env
+
+puma:
+  build: .
+  dockerfile: Dockerfile_puma
+  links:
+    - redis
+  volumes:
+    - .:/usr/src/app
+  env_file: config/docker.env
+
+redis:
+  image: redis:3
+  command: redis-server --appendonly yes
+  volumes:
+    - /data

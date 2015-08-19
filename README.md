@@ -1,7 +1,7 @@
 Git Notifier
 ==============================
 
-[![Build Status](https://travis-ci.org/andreausu/git-notifier.svg?branch=travis)](https://travis-ci.org/andreausu/git-notifier) [![Dependency Status](https://gemnasium.com/andreausu/git-notifier.svg)](https://gemnasium.com/andreausu/git-notifier)
+[![Circle CI](https://circleci.com/gh/andreausu/git-notifier.svg?style=svg)](https://circleci.com/gh/andreausu/git-notifier) [![Dependency Status](https://gemnasium.com/andreausu/git-notifier.svg)](https://gemnasium.com/andreausu/git-notifier)
 
 Git Notifier is a Sinatra app that makes possible to receive email notifications for interesting GitHub events.
 
@@ -24,13 +24,27 @@ Weekly report example
 Installation
 ------------
 
-Copy config.yml.example to config.yml and change the variables, then run:
+This app is fully dockerized, using the same containers for dev, CI and production, on you local env you can use docker-compose like this:
+
+Copy config/docker.env.example to config/docker.env and change the variables, then run:
 
 ``` bash
-$ bundle install
-$ puma -C config/puma.rb -e development # starts the webserver
-$ bundle exec sidekiq -r ./workers/init.rb -q notifications_checker -q send_email -q send_email_signup -q email_builder # starts the workers
+$ docker-compose up # you can use the -d option to run it in background
 ```
+
+At this point:
+- nginx should be listening on port 80 on the host where the docker daemon is running.
+- sidekiq will be running
+- puma will be running
+- redis will be running
+
+After registering a user using the web ui you can initiate a one off check for new notifications or emails to be sent like this:
+
+```
+docker exec githubnotifier_sidekiq_1 bundle exec ruby /usr/src/app/scripts/job_enqueuer.rb
+```
+
+There's also a docker file you can use that does this in a while loop, it's `Dockerfile_enqueuer` in the project root.
 
 Testing
 -------
