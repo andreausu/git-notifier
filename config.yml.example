@@ -12,12 +12,12 @@ redis:
 mail:
     enabled: APP_CONFIG_MAIL_ENABLE # true
     method: APP_CONFIG_MAIL_METHOD # smtp
-    from: APP_CONFIG_MAIL_FROM # Git Notifier <sender@email.com>
-    host: APP_CONFIG_MAIL_HOST # smtp.example.org
-    port: APP_CONFIG_MAIL_PORT # 587
-    user: APP_CONFIG_MAIL_USER # someuser@somedomain.com
-    password: APP_CONFIG_MAIL_PASSWORD # somepass
-    ssl: APP_CONFIG_MAIL_SSL # true
+    from: 'APP_CONFIG_MAIL_FROM' # Git Notifier <sender@email.com>
+    host: 'APP_CONFIG_MAIL_HOST' # smtp.example.org
+    port: 'APP_CONFIG_MAIL_PORT' # 587
+    user: 'APP_CONFIG_MAIL_USER' # someuser@somedomain.com
+    password: 'APP_CONFIG_MAIL_PASSWORD' # somepass
+    ssl: 'APP_CONFIG_MAIL_SSL' # true
 
 domain: APP_CONFIG_DOMAIN # localhost:4567
 
