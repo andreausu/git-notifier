@@ -17,7 +17,7 @@ mail:
     port: 'APP_CONFIG_MAIL_PORT' # 587
     user: 'APP_CONFIG_MAIL_USER' # someuser@somedomain.com
     password: 'APP_CONFIG_MAIL_PASSWORD' # somepass
-    ssl: 'APP_CONFIG_MAIL_SSL' # true
+    ssl: APP_CONFIG_MAIL_SSL # true
 
 domain: APP_CONFIG_DOMAIN # localhost:4567
 
