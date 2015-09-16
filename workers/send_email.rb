@@ -47,8 +47,8 @@ class SendEmail
       mail.delivery_method(:sendmail)
     else
       opts = {address: CONFIG['mail']['host'], port: CONFIG['mail']['port'], enable_starttls_auto: CONFIG['mail']['ssl']}
-      opts[:user_name] = CONFIG['mail']['user'] unless CONFIG['mail']['user'].empty?
-      opts[:password] = CONFIG['mail']['password'] unless CONFIG['mail']['password'].empty?
+      opts[:user_name] = CONFIG['mail']['user'] unless CONFIG['mail']['user'].nil? || CONFIG['mail']['user'].empty?
+      opts[:password] = CONFIG['mail']['password'] unless CONFIG['mail']['user'].nil? || CONFIG['mail']['password'].empty?
 
       mail.delivery_method(:smtp, opts)
     end
