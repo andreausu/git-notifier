@@ -92,6 +92,10 @@ class EmailBuilder
       "#{CONFIG['redis']['namespace']}:users:#{user['github_id']}"
     ) unless user['email_confirmed'] == "0" || emailEvents.empty?
 
+    Sidekiq.redis do |conn|
+      conn.hset("#{CONFIG['redis']['namespace']}:users:" + events_list_key.split(':').last, :last_email_queued_on, Time.now.to_i)
+    end
+
   end
 
   def inject_day(events)

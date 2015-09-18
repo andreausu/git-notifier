@@ -168,6 +168,7 @@ class GitNotifier < Sinatra::Base
               :registered_on, current_timestamp,
               :notifications_frequency, 'daily',
               :last_email_sent_on, current_timestamp,
+              :last_email_queued_on, current_timestamp,
               :first_check_completed, 0,
               :email_confirmed, 0
             )
