@@ -20,4 +20,8 @@ Sidekiq.configure_client do |config|
 end
 
 require 'sidekiq/web'
+
+Sidekiq::Web.use Rack::Session::Cookie, :secret => CONFIG['secret']
+Sidekiq::Web.instance_eval { @middleware.rotate!(-1) }
+
 run Sidekiq::Web
