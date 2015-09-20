@@ -50,7 +50,6 @@ Testing
 -------
 
 This project includes casperjs functional tests.
-Since the project relies on the GitHub API for basically everything the tests that require authenticated calls are not executed on Travis because doing so would expose the credentials of an actual GitHub user.
 
 On your local machine, you can run the tests like this
 
