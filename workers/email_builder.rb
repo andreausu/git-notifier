@@ -70,22 +70,25 @@ class EmailBuilder
     unsubscribe_url = URI.escape("https://#{CONFIG['domain']}/unsubscribe?id=#{user['github_id']}&expiry=#{expiry}&v=#{hmac}")
 
     to = user['email']
-    subject = 'Git Notifier'
+    notificationsText = "You have #{emailEvents.length == 1 ? 'a new notification' : emailEvents.length.to_s + ' new notifications'}"
+
     case user['notifications_frequency']
     when 'asap'
-      subject += ' notification'
+      subject = notificationsText
     when 'daily'
-      subject += ' daily report'
+      subject = "#{Time.now.strftime('%b %e')} daily report: #{notificationsText}"
     when 'weekly'
-      subject += ' weekly report'
+      subject = "#{Time.now.strftime('%b %e')} weekly report: #{notificationsText}"
     end
+
+    pp subject
 
     SendEmail.perform_async(
       to,
       subject,
       'html',
       'notification',
-      {:events => emailEvents, :unsubscribe_url => unsubscribe_url, :site_url => "https://#{CONFIG['domain']}/?utm_source=notifications&utm_medium=email&utm_campaign=timeline&utm_content=#{user['notifications_frequency']}"},
+      {:events => emailEvents, :unsubscribe_url => unsubscribe_url, :notifications_text => notificationsText, :site_url => "https://#{CONFIG['domain']}/?utm_source=notifications&utm_medium=email&utm_campaign=timeline&utm_content=#{user['notifications_frequency']}"},
       events_list_key,
       "#{CONFIG['redis']['namespace']}:locks:email:#{user['github_id']}",
       event_ids,
@@ -102,7 +105,7 @@ class EmailBuilder
     previousEvent = nil
     events.map! do |event|
       if previousEvent.nil? || (Time.at(previousEvent[:timestamp]).strftime('%d') != Time.at(event[:timestamp]).strftime('%d'))
-        event[:day] = Time.at(event[:timestamp]).strftime('%A, %B %e')
+        event[:day] = Time.at(event[:timestamp]).strftime('%A, %b %e')
       end
       previousEvent = event
     end
