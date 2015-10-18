@@ -46,6 +46,11 @@ docker exec githubnotifier_sidekiq_1 bundle exec ruby /usr/src/app/scripts/job_e
 
 There's also a docker file you can use that does this in a while loop, it's `Dockerfile_enqueuer` in the project root.
 
+Deployment
+-------
+
+See here: https://github.com/andreausu/gitnotifier-provisioning
+
 Testing
 -------
 
