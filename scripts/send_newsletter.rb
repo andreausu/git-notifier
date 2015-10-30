@@ -21,7 +21,7 @@ redis_conn = proc {
 }
 
 Sidekiq.configure_client do |config|
-  config.redis = ConnectionPool.new(size: 25, &redis_conn)
+  config.redis = ConnectionPool.new(size: 27, &redis_conn)
 end
 
 users_keys = Sidekiq.redis do |conn|

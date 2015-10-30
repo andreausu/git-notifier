@@ -33,7 +33,7 @@ class GitNotifier < Sinatra::Base
     }
 
     Sidekiq.configure_client do |cfg|
-      cfg.redis = ConnectionPool.new(size: 25, &redis_conn)
+      cfg.redis = ConnectionPool.new(size: 27, &redis_conn)
     end
 
     set :CONFIG, config
