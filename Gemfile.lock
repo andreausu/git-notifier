@@ -2,7 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     addressable (2.3.8)
-    backports (3.6.6)
+    backports (3.6.7)
     concurrent-ruby (1.0.0.pre4)
     connection_pool (2.2.0)
     descendants_tracker (0.0.4)
@@ -55,7 +55,7 @@ GEM
     redis (3.2.1)
     redis-namespace (1.5.2)
       redis (~> 3.0, >= 3.0.4)
-    sidekiq (4.0.0.pre1)
+    sidekiq (4.0.0.pre2)
       concurrent-ruby (= 1.0.0.pre4)
       connection_pool (~> 2.2, >= 2.2.0)
       json (~> 1.0)
@@ -90,6 +90,6 @@ DEPENDENCIES
   rack-flash3 (~> 1.0.5)
   rack_csrf (~> 2.5.0)
   redis (~> 3.2.1)
-  sidekiq (~> 4.0.0.pre1)
+  sidekiq (~> 4.0.0.pre2)
   sinatra (~> 1.4.5)
   sinatra-contrib (~> 1.4.2)
