@@ -15,7 +15,7 @@ machine:
 
 dependencies:
   override:
-    - docker info
+    - docker -v
     - sudo curl -L https://github.com/docker/compose/releases/download/1.5.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
     - sudo chmod +x /usr/local/bin/docker-compose
     - npm install -g casperjs@1.1.0-beta3
