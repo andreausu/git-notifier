@@ -3,7 +3,7 @@ GEM
   specs:
     addressable (2.3.8)
     backports (3.6.7)
-    concurrent-ruby (1.0.0.pre4)
+    concurrent-ruby (1.0.0)
     connection_pool (2.2.0)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
@@ -52,15 +52,12 @@ GEM
       rack (>= 1.0)
     rack_csrf (2.5.0)
       rack (>= 1.1.0)
-    redis (3.2.1)
-    redis-namespace (1.5.2)
-      redis (~> 3.0, >= 3.0.4)
-    sidekiq (4.0.0.pre2)
-      concurrent-ruby (= 1.0.0.pre4)
+    redis (3.2.2)
+    sidekiq (4.0.0)
+      concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)
       json (~> 1.0)
       redis (~> 3.2, >= 3.2.1)
-      redis-namespace (~> 1.5, >= 1.5.2)
     sinatra (1.4.6)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -90,6 +87,9 @@ DEPENDENCIES
   rack-flash3 (~> 1.0.5)
   rack_csrf (~> 2.5.0)
   redis (~> 3.2.1)
-  sidekiq (~> 4.0.0.pre2)
+  sidekiq (~> 4.0.0)
   sinatra (~> 1.4.5)
   sinatra-contrib (~> 1.4.2)
+
+BUNDLED WITH
+   1.10.6
