@@ -1,9 +1,7 @@
-FROM ruby:2.2.4-onbuild
+FROM gitnotifier/ruby:latest
 
 # Set proper locale
-ENV LANG=C.UTF-8 \
-
-APP_ENV=development \
+ENV APP_ENV=development \
 APP_CONFIG_GITHUB_CLIENT_ID=someid \
 APP_CONFIG_GITHUB_CLIENT_SECRET=somesecret \
 
@@ -21,8 +19,6 @@ APP_CONFIG_DEPLOY_ID=1 \
 APP_CONFIG_EMAIL_DEV_ON_SIGNUP=false \
 APP_CONFIG_DEV_EMAIL_ADDRESS=some@email.com
 
-ADD ./docker/puma/entrypoint.sh /entrypoint.sh
-
 EXPOSE 9292
 
-ENTRYPOINT [ "/entrypoint.sh" ]
+ENTRYPOINT [ "/usr/src/app/docker/puma/entrypoint.sh" ]
