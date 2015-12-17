@@ -1,4 +1,4 @@
-FROM ruby:2.2.3-onbuild
+FROM ruby:2.2.4-onbuild
 
 # Set proper locale
 ENV LANG=C.UTF-8 \
