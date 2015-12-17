@@ -11,8 +11,6 @@ buildDeps=' \
 		patch \
 	' && \
   apt-get update && apt-get install -y --no-install-recommends $buildDeps && \
-  apt-get remove --purge -y $buildDeps && \
-  apt-get autoremove -y && \
   rm -rf /var/lib/apt/lists/*
 
 ONBUILD ADD . /usr/src/app
