@@ -42,12 +42,15 @@ deployment:
     commands:
       - docker login -e "$DOCKER_EMAIL" -u "$DOCKER_USER" -p "$DOCKER_PASS"
       - bower install
-      - docker build -f Dockerfile_puma -t andreausu/ghntfr-puma .
-      - docker build -f Dockerfile_sidekiq -t andreausu/ghntfr-sidekiq .
-      - docker build -f Dockerfile_enqueuer -t andreausu/ghntfr-enqueuer .
-      - docker tag andreausu/ghntfr-puma andreausu/ghntfr-puma:`echo "$CIRCLE_BRANCH" | sed 's/[^a-zA-Z0-9_\-]/-/g'`
-      - docker tag andreausu/ghntfr-sidekiq andreausu/ghntfr-sidekiq:`echo "$CIRCLE_BRANCH" | sed 's/[^a-zA-Z0-9_\-]/-/g'`
-      - docker tag andreausu/ghntfr-enqueuer andreausu/ghntfr-enqueuer:`echo "$CIRCLE_BRANCH" | sed 's/[^a-zA-Z0-9_\-]/-/g'`
-      - docker push andreausu/ghntfr-puma:`echo "$CIRCLE_BRANCH" | sed 's/[^a-zA-Z0-9_\-]/-/g'`
-      - docker push andreausu/ghntfr-sidekiq:`echo "$CIRCLE_BRANCH" | sed 's/[^a-zA-Z0-9_\-]/-/g'`
-      - docker push andreausu/ghntfr-enqueuer:`echo "$CIRCLE_BRANCH" | sed 's/[^a-zA-Z0-9_\-]/-/g'`
+      - docker build -f Dockerfile_puma -t gitnotifier/puma:latest .
+      - docker build -f Dockerfile_sidekiq -t gitnotifier/sidekiq:latest .
+      - docker build -f Dockerfile_enqueuer -t gitnotifier/enqueuer:latest .
+      - docker tag gitnotifier/puma gitnotifier/puma:`echo "$CIRCLE_BRANCH" | sed 's/[^a-zA-Z0-9_\-]/-/g'`
+      - docker tag gitnotifier/sidekiq gitnotifier/sidekiq:`echo "$CIRCLE_BRANCH" | sed 's/[^a-zA-Z0-9_\-]/-/g'`
+      - docker tag gitnotifier/enqueuer gitnotifier/enqueuer:`echo "$CIRCLE_BRANCH" | sed 's/[^a-zA-Z0-9_\-]/-/g'`
+      - docker push gitnotifier/puma:`echo "$CIRCLE_BRANCH" | sed 's/[^a-zA-Z0-9_\-]/-/g'`
+      - docker push gitnotifier/sidekiq:`echo "$CIRCLE_BRANCH" | sed 's/[^a-zA-Z0-9_\-]/-/g'`
+      - docker push gitnotifier/enqueuer:`echo "$CIRCLE_BRANCH" | sed 's/[^a-zA-Z0-9_\-]/-/g'`
+      - docker push gitnotifier/puma:latest
+      - docker push gitnotifier/sidekiq:latest
+      - docker push gitnotifier/enqueuer:latest
