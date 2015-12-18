@@ -1,4 +1,12 @@
+Hello <%= username %>!
+Thank you for signing up, you're wonderful :)
+
 Before you can start receiving GitHub notifications you need to confirm your email address.
 Please confirm your email address by clicking the link below.
-="\r\n"
-= confirm_link
+<%= confirm_link %>
+
+If you have any questions feel free to reach out by replying to the email or by writing to us on Twitter, you can find the link at the bottom of this email.
+
+- The Git Notifier Team
+
+Follow @GitNotifier on Twitter: https://twitter.com/GitNotifier

@@ -8,3 +8,4 @@ tmp/pids/*
 tmp/sockets/*
 scripts/notes.txt
 .capistrano/
+node_modules/

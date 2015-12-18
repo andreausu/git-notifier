@@ -7,3 +7,4 @@ bower_components/
 .git_old*
 scripts/notes.txt
 .capistrano/
+node_modules/

@@ -229,7 +229,7 @@ class GitNotifier < Sinatra::Base
       Sidekiq::Client.push(
         'queue' => 'send_email_signup',
         'class' => SendEmail,
-        'args' => [email, 'Confirm your Git Notifier email address!', 'html', 'confirm', {:confirm_link => link}]
+        'args' => [email, 'Confirm your Git Notifier email address!', 'html', 'confirm', {:confirm_link => link, :username => user['login']}]
       )
 
       flash.now[:success] = "We have sent an email to #{email}, please open it and click on the link inside to activate your account."

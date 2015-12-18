@@ -60,40 +60,39 @@ class EmailBuilder
       emailEvents << {:html => html, :text => text, :timestamp => event['timestamp']}
     end
 
-    emailEvents = inject_day(emailEvents) unless user['notifications_frequency'] == 'asap'
+    unless emailEvents.empty?
+      emailEvents = inject_day(emailEvents) if user['notifications_frequency'] == 'weekly'
 
-    expiry = (Time.now + 31536000).to_i.to_s
+      expiry = (Time.now + 31536000).to_i.to_s
 
-    digest = OpenSSL::Digest.new('sha512')
-    hmac = OpenSSL::HMAC.hexdigest(digest, CONFIG['secret'], user['github_id'] + expiry)
+      digest = OpenSSL::Digest.new('sha512')
+      hmac = OpenSSL::HMAC.hexdigest(digest, CONFIG['secret'], user['github_id'] + expiry)
 
-    unsubscribe_url = URI.escape("https://#{CONFIG['domain']}/unsubscribe?id=#{user['github_id']}&expiry=#{expiry}&v=#{hmac}")
+      unsubscribe_url = URI.escape("https://#{CONFIG['domain']}/unsubscribe?id=#{user['github_id']}&expiry=#{expiry}&v=#{hmac}")
 
-    to = user['email']
-    notificationsText = "You have #{emailEvents.length == 1 ? 'a new notification' : emailEvents.length.to_s + ' new notifications'}"
+      to = user['email']
+      subject = "You have #{emailEvents.length == 1 ? 'a new notification' : emailEvents.length.to_s + ' new notifications'}"
+      notificationsText = subject + (emailEvents.length == 1 ? "!<br />You notification was received on #{Time.at(emailEvents[0][:timestamp]).strftime('%A %b %e')} at #{Time.at(emailEvents[0][:timestamp]).strftime('%k:%M')}." : "!<br />Your last notification was received on #{Time.at(emailEvents[0][:timestamp]).strftime('%A %b %e')} at #{Time.at(emailEvents[0][:timestamp]).strftime('%k:%M')}.")
 
-    case user['notifications_frequency']
-    when 'asap'
-      subject = notificationsText
-    when 'daily'
-      subject = "#{Time.now.strftime('%b %e')} daily report: #{notificationsText}"
-    when 'weekly'
-      subject = "#{Time.now.strftime('%b %e')} weekly report: #{notificationsText}"
+      case user['notifications_frequency']
+      when 'daily'
+        subject = "#{Time.now.strftime('%b %e')} daily report: #{subject}"
+      when 'weekly'
+        subject = "#{Time.now.strftime('%b %e')} weekly report: #{subject}"
+      end
+
+      SendEmail.perform_async(
+        to,
+        subject,
+        'html',
+        'notification',
+        {:events => emailEvents, :username => user['login'], :unsubscribe_url => unsubscribe_url, :notifications_text => notificationsText, :site_url => "https://#{CONFIG['domain']}/?utm_source=notifications&utm_medium=email&utm_campaign=timeline&utm_content=#{user['notifications_frequency']}"},
+        events_list_key,
+        "#{CONFIG['redis']['namespace']}:locks:email:#{user['github_id']}",
+        event_ids,
+        "#{CONFIG['redis']['namespace']}:users:#{user['github_id']}"
+      ) unless user['email_confirmed'] == "0"
     end
-
-    pp subject
-
-    SendEmail.perform_async(
-      to,
-      subject,
-      'html',
-      'notification',
-      {:events => emailEvents, :unsubscribe_url => unsubscribe_url, :notifications_text => notificationsText, :site_url => "https://#{CONFIG['domain']}/?utm_source=notifications&utm_medium=email&utm_campaign=timeline&utm_content=#{user['notifications_frequency']}"},
-      events_list_key,
-      "#{CONFIG['redis']['namespace']}:locks:email:#{user['github_id']}",
-      event_ids,
-      "#{CONFIG['redis']['namespace']}:users:#{user['github_id']}"
-    ) unless user['email_confirmed'] == "0" || emailEvents.empty?
 
     Sidekiq.redis do |conn|
       conn.hset("#{CONFIG['redis']['namespace']}:users:" + events_list_key.split(':').last, :last_email_queued_on, Time.now.to_i)

@@ -1,8 +1,8 @@
-- events.each do |event|
-  =event['text'] + "\r\n"
+Hello <%= defined?(username) ? username : 'dear user' %> :)
+<%= notifications_text %>
 
-="\r\n\r\n"
+<% for event in events %><% if defined?(event['day']) and !event['day'].nil? %><%= event['day'] %><% end %><%= event['text'] %><% end %>
 
-View your full notifications history: #{site_url}
+View your full notifications history: <%= site_url %>
 
-Unsubscribe: #{unsubscribe_url}
+Unsubscribe: <%= unsubscribe_url %>

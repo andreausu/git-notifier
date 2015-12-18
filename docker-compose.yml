@@ -30,6 +30,6 @@ puma:
 
 redis:
   image: redis:3
-  command: redis-server --appendonly yes
+  command: redis-server --appendonly yes # --dbfilename dump.rdb --dir /data
   volumes:
     - /data

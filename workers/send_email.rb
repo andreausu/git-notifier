@@ -1,6 +1,5 @@
-require 'pp'
 require 'json'
-require 'haml'
+require 'erb'
 require 'mail'
 # This is trying to workaround an issue in `mail` gem
 # Issue: https://github.com/mikel/mail/issues/912
@@ -36,12 +35,12 @@ class SendEmail
     end
 
     textTemplate = File.dirname(__FILE__) + "/../views/email/#{template}.txt"
-    textBody = Haml::Engine.new(File.read(textTemplate)).render(Object.new, locals)
+    textBody = ERB.new(File.read(textTemplate)).result(OpenStruct.new(locals).instance_eval { binding })
 
     if content_type == 'html'
 
-      htmlTemplate = File.dirname(__FILE__) + "/../views/email/#{template}.haml"
-      htmlBody = Haml::Engine.new(File.read(htmlTemplate)).render(Object.new, locals)
+      htmlTemplate = File.dirname(__FILE__) + "/../views/email/#{template}.erb"
+      htmlBody = ERB.new(File.read(htmlTemplate)).result(OpenStruct.new(locals).instance_eval { binding })
 
       html_part = Mail::Part.new do
         content_type 'text/html; charset=UTF-8'

@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="viewport" content="width=device-width" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="css/styles.css" media="all" rel="stylesheet" type="text/css" />
+</head>
+
+<body itemscope itemtype="http://schema.org/EmailMessage">
+
+<table class="body-wrap">
+	<tr>
+		<td></td>
+		<td class="container" width="600">
+			<div class="content">
+				<table class="main" width="100%" cellpadding="0" cellspacing="0">
+					<tr>
+						<td class="alert">
+							Git Notifier
+						</td>
+					</tr>
+					<tr>
+						<td class="content-wrap">
+							<table width="100%" cellpadding="0" cellspacing="0">
+								<tr>
+									<td class="content-block greetings">
+										Hello <%= defined?(username) ? username : 'dear user' %> :)<br />
+										<%= notifications_text %>
+									</td>
+								</tr>
+<% for event in events %>
+	<% if defined?(event['day']) and !event['day'].nil? %>
+								<tr>
+									<td class="content-block centered notifications-day">
+										<%= event['day'] %>
+									</td>
+								</tr>
+	<% end %>
+								<tr>
+									<td class="content-block centered notifications-text">
+										<%= event['html'] %>
+									</td>
+								</tr>
+<% end %>
+								<tr>
+									<td class="content-block centered action-button">
+										<a href="<%= site_url %>" class="btn-primary">View your full notifications history</a>
+									</td>
+								</tr>
+								<tr>
+									<td class="content-block signature">
+										Best,<br />
+										- The Git Notifier Team
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+				<div class="footer">
+					<table width="100%">
+						<tr>
+							<td class="aligncenter content-block">
+								<a href="<%= unsubscribe_url %>">Unsubscribe</a> from these notifications
+								| Follow <a href="https://twitter.com/GitNotifier">@GitNotifier</a> on Twitter
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</td>
+		<td></td>
+	</tr>
+</table>
+
+</body>
+</html>
