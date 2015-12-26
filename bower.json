@@ -15,9 +15,9 @@
   ],
   "dependencies": {
     "bootstrap-social": "4.10.1",
-    "bootstrap": "3.3.5",
+    "bootstrap": "3.3.6",
     "jquery": "2.1.4",
-    "font-awesome": "4.4.0",
+    "font-awesome": "4.5.0",
     "mailcheck": "1.1.1",
     "html5shiv": "3.7.3",
     "respond": "1.4.2",
