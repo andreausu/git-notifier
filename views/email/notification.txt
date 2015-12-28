@@ -1,7 +1,7 @@
 Hello <%= defined?(username) ? username : 'dear user' %> :)
 <%= notifications_text %>
-
-<% for event in events %><% if defined?(event['day']) and !event['day'].nil? %><%= event['day'] %><% end %><%= event['text'] %><% end %>
+<% for event in events %>
++ <% if defined?(event['day']) and !event['day'].nil? %>[<%= event['day'] %>] <% end %><%= event['text'] %><% end %>
 
 View your full notifications history: <%= site_url %>
 
