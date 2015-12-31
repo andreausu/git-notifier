@@ -55,9 +55,7 @@ class EmailBuilder
         html = "#{entity} that was following you has been deleted"
       end
 
-      text = html.gsub(/<br\s?\/?>/, "\r\n").gsub(/<\/?[^>]*>/, '')
-
-      emailEvents << {:html => html, :text => text, :timestamp => event['timestamp']}
+      emailEvents << {:html => html, :timestamp => event['timestamp']}
     end
 
     unless emailEvents.empty?

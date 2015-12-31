@@ -73,6 +73,9 @@ class SendEmail
       conn.del(delete_key) if delete_key
       conn.zadd(lock_key, Time.now.to_i, JSON.generate(lock_id)) if lock_id
     end
-
   end
+end
+
+def strip_html(string)
+  string.gsub(/<br\s?\/?>/, "\r\n").gsub(/<\/?[^>]*>/, '')
 end
