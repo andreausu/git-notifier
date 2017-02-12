@@ -27,6 +27,8 @@ puma:
   volumes:
     - .:/usr/src/app
   env_file: config/docker.env
+  ports:
+    - "9292:9292"
 
 redis:
   image: redis:3
