@@ -3,7 +3,7 @@
 require 'haml'
 require 'json'
 require 'github_api'
-require 'pp'
+require 'datadog/statsd'
 
 class GitNotifier < Sinatra::Base
 
@@ -22,6 +22,8 @@ class GitNotifier < Sinatra::Base
     fail "Configuration file " + config_file + " missing!" unless File.exist?(config_file)
     config = YAML.load_file(config_file)
 
+    statsd = Datadog::Statsd.new(config['statsd']['host'], config['statsd']['port'])
+
     redis_conn = proc {
       Redis.new(
         :driver => :hiredis,
@@ -37,6 +39,7 @@ class GitNotifier < Sinatra::Base
     end
 
     set :CONFIG, config
+    set :STATSD, statsd
 
     use Rack::Session::Cookie, :expire_after => 2592000, :secret => config['secret'] # 30 days
 
@@ -231,6 +234,7 @@ class GitNotifier < Sinatra::Base
         'class' => SendEmail,
         'args' => [email, 'Confirm your Git Notifier email address!', 'html', 'confirm', {:confirm_link => link, :username => user['login']}]
       )
+      settigs.STATSD.increment('ghntfr.business.signup')
 
       flash.now[:success] = "We have sent an email to #{email}, please open it and click on the link inside to activate your account."
     end

@@ -15,11 +15,14 @@ require 'mail'
 # This is merely a workaround since
 # it should fixed by not using the `autoload`
 require "mail/parsers/content_type_parser"
+require 'datadog/statsd'
 
 class SendEmail
   include Sidekiq::Worker
   sidekiq_options :queue => :send_email
+  STATSD = Datadog::Statsd.new() unless defined? STATSD
   def perform(to, subject, content_type = 'text', template = nil, locals = {}, delete_key = nil, lock_key = nil, lock_id = nil, user_id = nil)
+    STATSD.increment('ghntfr.workers.send_email.start')
 
     raise "Missing template!" unless template
 
@@ -74,6 +77,7 @@ class SendEmail
       conn.zadd(lock_key, Time.now.to_i, JSON.generate(lock_id)) if lock_id
     end
   end
+  STATSD.increment('ghntfr.workers.send_email.finish')
 end
 
 def strip_html(string)

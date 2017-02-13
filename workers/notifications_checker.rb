@@ -2,13 +2,16 @@ require 'github_api'
 require 'pp'
 require 'json'
 require 'net/http'
+require 'datadog/statsd'
 
 class NotificationsChecker
   include Sidekiq::Worker
   sidekiq_options :queue => :notifications_checker, :retry => false, :dead => false
   @first_time = nil
   @new_events = nil
+  STATSD = Datadog::Statsd.new() unless defined? STATSD
   def perform(user_key, first_time = false)
+    STATSD.increment('ghntfr.workers.notifications_checker.start')
     @new_events = []
     puts 'Started processing ' + user_key
     @first_time = first_time
@@ -137,7 +140,7 @@ class NotificationsChecker
       end
       enqueue_email_builder(user) unless @first_time
     end
-
+    STATSD.increment('ghntfr.workers.notifications_checker.finish')
   end
 
   def on_new_event(type, entity)

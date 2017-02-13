@@ -4,11 +4,15 @@ require 'sidekiq'
 require 'redis'
 require_relative '../workers/notifications_checker'
 require_relative '../workers/email_builder'
+require 'datadog/statsd'
 require 'newrelic_rpm' # it should be the last entry in the require list
 
 config_file = File.dirname(__FILE__) + '/../config.yml'
 fail "Configuration file " + config_file + " missing!" unless File.exist?(config_file)
 CONFIG = YAML.load_file(config_file)
+
+statsd = Datadog::Statsd.new(CONFIG['statsd']['host'], CONFIG['statsd']['port'])
+statsd.increment('ghntfr.scripts.job_enqueuer.start')
 
 users_keys = nil
 
@@ -97,3 +101,5 @@ Sidekiq.redis do |conn|
     Sidekiq::Client.push_bulk('queue' => 'email_builder', 'class' => EmailBuilder, 'args' => jobs_args)
   end
 end
+
+statsd.increment('ghntfr.scripts.job_enqueuer.finish')

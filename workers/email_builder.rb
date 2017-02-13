@@ -6,7 +6,9 @@ require_relative 'send_email'
 class EmailBuilder
   include Sidekiq::Worker
   sidekiq_options :queue => :email_builder
+  STATSD = Datadog::Statsd.new() unless defined? STATSD
   def perform(events_list_key)
+    STATSD.increment('ghntfr.workers.email_builder.start')
 
     events = nil
     user = nil
@@ -96,6 +98,7 @@ class EmailBuilder
       conn.hset("#{CONFIG['redis']['namespace']}:users:" + events_list_key.split(':').last, :last_email_queued_on, Time.now.to_i)
     end
 
+    STATSD.increment('ghntfr.workers.email_builder.finish')
   end
 
   def inject_day(events)

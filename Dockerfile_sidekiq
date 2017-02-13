@@ -1,4 +1,4 @@
-FROM gitnotifier/ruby:latest
+FROM gitnotifier/ruby:2.4.0
 
 # Set proper locale
 ENV APP_ENV=development \
@@ -9,6 +9,9 @@ APP_CONFIG_REDIS_HOST=localhost \
 APP_CONFIG_REDIS_PORT=6379 \
 APP_CONFIG_REDIS_DB=1 \
 APP_CONFIG_REDIS_NAMESPACE=ghntfr \
+
+APP_CONFIG_STATSD_HOST=localhost \
+APP_CONFIG_STATSD_PORT=8125 \
 
 APP_CONFIG_DOMAIN=gitnotifier.local \
 

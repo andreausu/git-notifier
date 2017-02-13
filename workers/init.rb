@@ -1,10 +1,14 @@
 # encoding: utf-8
 
+require 'datadog/statsd'
+
 GC::Profiler.enable
 
 config_file = File.dirname(__FILE__) + '/../config.yml'
 fail "Configuration file " + config_file + " missing!" unless File.exist?(config_file)
 CONFIG = YAML.load_file(config_file)
+
+STATSD = Datadog::Statsd.new(CONFIG['statsd']['host'], CONFIG['statsd']['port'])
 
 redis_conn = proc {
   Redis.new(

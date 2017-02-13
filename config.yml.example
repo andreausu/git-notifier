@@ -9,6 +9,10 @@ redis:
     db: APP_CONFIG_REDIS_DB # 0
     namespace: APP_CONFIG_REDIS_NAMESPACE # ghntfr
 
+statsd:
+  host: APP_CONFIG_STATSD_HOST # localhost
+  port: APP_CONFIG_STATSD_PORT # 8125
+
 mail:
     enabled: APP_CONFIG_MAIL_ENABLE # true
     method: APP_CONFIG_MAIL_METHOD # smtp
