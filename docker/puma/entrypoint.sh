@@ -17,6 +17,9 @@ sed -i 's/APP_CONFIG_REDIS_PORT/'"$APP_CONFIG_REDIS_PORT"'/g' /usr/src/app/confi
 sed -i 's/APP_CONFIG_REDIS_DB/'"$APP_CONFIG_REDIS_DB"'/g' /usr/src/app/config.yml
 sed -i 's/APP_CONFIG_REDIS_NAMESPACE/'"$APP_CONFIG_REDIS_NAMESPACE"'/g' /usr/src/app/config.yml
 
+sed -i 's/APP_CONFIG_STATSD_HOST/'"$APP_CONFIG_STATSD_HOST"'/g' /usr/src/app/config.yml
+sed -i 's/APP_CONFIG_STATSD_PORT/'"$APP_CONFIG_STATSD_PORT"'/g' /usr/src/app/config.yml
+
 sed -i 's/APP_CONFIG_DOMAIN/'"$APP_CONFIG_DOMAIN"'/g' /usr/src/app/config.yml
 
 sed -i 's/APP_CONFIG_SECRET/'"$APP_CONFIG_SECRET"'/g' /usr/src/app/config.yml
@@ -26,4 +29,4 @@ sed -i 's/APP_CONFIG_DEPLOY_ID/'"$APP_CONFIG_DEPLOY_ID"'/g' /usr/src/app/config.
 sed -i 's/APP_CONFIG_EMAIL_DEV_ON_SIGNUP/'"$APP_CONFIG_EMAIL_DEV_ON_SIGNUP"'/g' /usr/src/app/config.yml
 sed -i 's/APP_CONFIG_DEV_EMAIL_ADDRESS/'"$APP_CONFIG_DEV_EMAIL_ADDRESS"'/g' /usr/src/app/config.yml
 
-puma -C config/puma.rb -e "$APP_ENV"
+exec puma -C config/puma.rb -e "$APP_ENV"
