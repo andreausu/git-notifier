@@ -1,4 +1,4 @@
-FROM ruby:2.2.4-slim
+FROM ruby:2.4.0-slim
 
 # Set proper locale
 ENV LANG=C.UTF-8
