@@ -19,7 +19,8 @@ dependencies:
     - docker -v
     - sudo curl -L https://github.com/docker/compose/releases/download/1.5.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
     - sudo chmod +x /usr/local/bin/docker-compose
-    - npm install -g casperjs@1.1.0-beta3
+    - npm install -g casperjs@1.1.4
+    - npm install -g bower
     - cp config/docker.env.example config/docker.env
     - sed -i 's/APP_CONFIG_GITHUB_CLIENT_ID=.*/APP_CONFIG_GITHUB_CLIENT_ID='"$APP_CONFIG_GITHUB_CLIENT_ID"'/g' config/docker.env
     - sed -i 's/APP_CONFIG_GITHUB_CLIENT_SECRET=.*/APP_CONFIG_GITHUB_CLIENT_SECRET='"$APP_CONFIG_GITHUB_CLIENT_SECRET"'/g' config/docker.env
