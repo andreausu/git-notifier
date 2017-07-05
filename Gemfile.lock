@@ -49,7 +49,7 @@ GEM
       rack
     rack-test (0.6.3)
       rack (>= 1.0)
-    rack_csrf (2.5.0)
+    rack_csrf (2.6.0)
       rack (>= 1.1.0)
     redis (3.3.3)
     sidekiq (4.1.0)
@@ -84,7 +84,7 @@ DEPENDENCIES
   newrelic_rpm (~> 3.18.1)
   puma (~> 3.9.1)
   rack-flash3 (~> 1.0.5)
-  rack_csrf (~> 2.5.0)
+  rack_csrf (~> 2.6.0)
   redis (~> 3.3.3)
   sidekiq (~> 4.1.0)
   sinatra (~> 1.4.5)
