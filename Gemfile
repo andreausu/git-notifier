@@ -6,7 +6,7 @@ gem "redis", "~> 3.3.3"
 gem 'hiredis', '~> 0.6.0'
 gem 'haml', '~> 4.0.6'
 gem 'json', '~> 2.1'
-gem 'sidekiq', '~> 4.1.0'
+gem 'sidekiq', '~> 5.0.4'
 gem 'mail', '~> 2.6.6'
 gem 'puma', '~> 3.9.1'
 gem 'newrelic_rpm', '~> 3.18.1'
