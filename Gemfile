@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'sinatra', '~> 1.4.5'
-gem 'github_api', '~> 0.13.0'
+gem 'github_api', '~> 0.14.5'
 gem "redis", "~> 3.3.3"
 gem 'hiredis', '~> 0.6.0'
 gem 'haml', '~> 4.0.6'
