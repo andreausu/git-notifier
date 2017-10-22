@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'sinatra', '~> 1.4.5'
 gem 'github_api', '~> 0.13.0'
-gem "redis", "~> 3.3.3"
+gem "redis", "~> 3.3.5"
 gem 'hiredis', '~> 0.6.0'
 gem 'haml', '~> 4.0.6'
 gem 'json', '~> 2.1'
