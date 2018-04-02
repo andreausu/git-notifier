@@ -42,10 +42,10 @@ GEM
       multi_xml (~> 0.5)
       rack (~> 1.2)
     puma (3.9.1)
-    rack (1.6.8)
+    rack (1.6.9)
     rack-flash3 (1.0.5)
       rack
-    rack-protection (1.5.3)
+    rack-protection (1.5.5)
       rack
     rack-test (0.6.3)
       rack (>= 1.0)
