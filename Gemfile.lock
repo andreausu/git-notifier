@@ -20,7 +20,7 @@ GEM
     haml (4.0.7)
       tilt
     hashie (3.4.3)
-    hiredis (0.6.1)
+    hiredis (0.6.3)
     json (2.1.0)
     jwt (1.5.2)
     mail (2.6.6)
@@ -78,7 +78,7 @@ DEPENDENCIES
   dogstatsd-ruby (~> 3.0.0)
   github_api (~> 0.13.0)
   haml (~> 4.0.6)
-  hiredis (~> 0.6.0)
+  hiredis (~> 0.6.3)
   json (~> 2.1)
   mail (~> 2.6.6)
   newrelic-redis (~> 2.0.0)
