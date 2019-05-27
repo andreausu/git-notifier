@@ -4,7 +4,7 @@ gem 'sinatra', '~> 1.4.5'
 gem 'github_api', '~> 0.13.0'
 gem "redis", "~> 3.3.3"
 gem 'hiredis', '~> 0.6.0'
-gem 'haml', '~> 4.0.6'
+gem 'haml', '~> 5.1.1'
 gem 'json', '~> 2.1'
 gem 'sidekiq', '~> 5.0.4'
 gem 'mail', '~> 2.6.6'
